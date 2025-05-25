@@ -36,7 +36,7 @@ export const Header = () => {
           {/* Logo */}
           <div className="flex items-center">
             <img 
-              src="/lovable-uploads/35e81dc0-cacf-4de2-9650-101df24d9067.png" 
+              src="/lovable-uploads/5da8d96d-ab3d-4a6e-9e44-74498b5c3e1d.png" 
               alt="Jones & Son Property Maintenance" 
               className="h-16 w-auto"
             />

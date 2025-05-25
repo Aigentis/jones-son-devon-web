@@ -7,12 +7,32 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Calendar, Clock, User, ArrowRight } from "lucide-react";
 import { useBlogPosts, useCategories } from "@/hooks/useBlog";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
 const Blog = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 6;
   
-  const { data: blogPosts = [], isLoading: postsLoading } = useBlogPosts(selectedCategory);
+  const { data: blogPosts = [], isLoading: postsLoading, error: postsError } = useBlogPosts(selectedCategory);
   const { data: categories = [], isLoading: categoriesLoading } = useCategories();
+
+  console.log('Blog component state:', { blogPosts, categories, selectedCategory });
+
+  // Calculate pagination
+  const totalPosts = blogPosts.length;
+  const totalPages = Math.ceil(totalPosts / postsPerPage);
+  const startIndex = (currentPage - 1) * postsPerPage;
+  const endIndex = startIndex + postsPerPage;
+  const currentPosts = blogPosts.slice(startIndex, endIndex);
 
   const allCategories = ["All", ...categories.map(cat => cat.name)];
 
@@ -21,11 +41,20 @@ const Blog = () => {
       <div className="min-h-screen bg-white">
         <Header />
         <div className="container mx-auto px-4 py-16">
-          <div className="text-center">Loading blog posts...</div>
+          <div className="text-center">
+            <div className="animate-pulse">
+              <div className="h-8 bg-gray-200 rounded w-64 mx-auto mb-4"></div>
+              <div className="h-4 bg-gray-200 rounded w-96 mx-auto"></div>
+            </div>
+          </div>
         </div>
         <Footer />
       </div>
     );
+  }
+
+  if (postsError) {
+    console.error('Blog posts error:', postsError);
   }
 
   return (
@@ -55,7 +84,10 @@ const Blog = () => {
                 key={category}
                 variant={category === selectedCategory ? "default" : "outline"}
                 className={category === selectedCategory ? "bg-blue-600 hover:bg-blue-700" : ""}
-                onClick={() => setSelectedCategory(category)}
+                onClick={() => {
+                  setSelectedCategory(category);
+                  setCurrentPage(1);
+                }}
               >
                 {category}
               </Button>
@@ -70,71 +102,124 @@ const Blog = () => {
           {blogPosts.length === 0 ? (
             <div className="text-center py-16">
               <h3 className="text-2xl font-semibold text-gray-600 mb-4">No blog posts found</h3>
-              <p className="text-gray-500">
+              <p className="text-gray-500 mb-8">
                 {selectedCategory === "All" 
-                  ? "No blog posts have been published yet." 
-                  : `No posts found in the "${selectedCategory}" category.`}
+                  ? "We're working on adding some great content. Check back soon!" 
+                  : `No posts found in the "${selectedCategory}" category. Try selecting a different category.`}
               </p>
+              <Button 
+                variant="outline"
+                onClick={() => setSelectedCategory("All")}
+                className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white"
+              >
+                View All Posts
+              </Button>
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
-              {blogPosts.map((post) => (
-                <Card key={post.id} className="overflow-hidden hover:shadow-xl transition-all duration-300 group">
-                  {post.featured_image && (
-                    <div className="aspect-[16/10] overflow-hidden">
-                      <img 
-                        src={post.featured_image} 
-                        alt={post.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            <>
+              <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8 mb-12">
+                {currentPosts.map((post) => (
+                  <Card key={post.id} className="overflow-hidden hover:shadow-xl transition-all duration-300 group">
+                    {post.featured_image && (
+                      <div className="aspect-[16/10] overflow-hidden">
+                        <img 
+                          src={post.featured_image} 
+                          alt={post.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
+                    )}
+                    <CardHeader className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <Badge className="bg-orange-100 text-orange-800 hover:bg-orange-200">
+                          {post.category}
+                        </Badge>
+                        <div className="flex items-center text-sm text-gray-500">
+                          <Clock className="h-4 w-4 mr-1" />
+                          5 min read
+                        </div>
+                      </div>
+                      <CardTitle className="text-xl group-hover:text-blue-600 transition-colors">
+                        {post.title}
+                      </CardTitle>
+                      <CardDescription className="text-gray-600 leading-relaxed">
+                        {post.excerpt || post.content.substring(0, 150) + '...'}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center space-x-4 text-sm text-gray-500">
+                          <div className="flex items-center">
+                            <User className="h-4 w-4 mr-1" />
+                            Jones & Son Team
+                          </div>
+                          <div className="flex items-center">
+                            <Calendar className="h-4 w-4 mr-1" />
+                            {new Date(post.published_at || post.created_at).toLocaleDateString('en-GB', {
+                              day: 'numeric',
+                              month: 'long',
+                              year: 'numeric'
+                            })}
+                          </div>
+                        </div>
+                      </div>
+                      <Button 
+                        variant="outline" 
+                        className="group-hover:bg-blue-600 group-hover:text-white transition-colors"
+                        onClick={() => window.location.href = `/blog/${post.slug}`}
+                      >
+                        Read More
+                        <ArrowRight className="h-4 w-4 ml-2" />
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+
+              {/* Pagination */}
+              {totalPages > 1 && (
+                <Pagination>
+                  <PaginationContent>
+                    <PaginationItem>
+                      <PaginationPrevious 
+                        href="#"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          if (currentPage > 1) setCurrentPage(currentPage - 1);
+                        }}
+                        className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
                       />
-                    </div>
-                  )}
-                  <CardHeader className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <Badge className="bg-orange-100 text-orange-800 hover:bg-orange-200">
-                        {post.category}
-                      </Badge>
-                      <div className="flex items-center text-sm text-gray-500">
-                        <Clock className="h-4 w-4 mr-1" />
-                        5 min read
-                      </div>
-                    </div>
-                    <CardTitle className="text-xl group-hover:text-blue-600 transition-colors">
-                      {post.title}
-                    </CardTitle>
-                    <CardDescription className="text-gray-600 leading-relaxed">
-                      {post.excerpt}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="pt-0">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center space-x-4 text-sm text-gray-500">
-                        <div className="flex items-center">
-                          <User className="h-4 w-4 mr-1" />
-                          Jones & Son Team
-                        </div>
-                        <div className="flex items-center">
-                          <Calendar className="h-4 w-4 mr-1" />
-                          {new Date(post.published_at || post.created_at).toLocaleDateString('en-GB', {
-                            day: 'numeric',
-                            month: 'long',
-                            year: 'numeric'
-                          })}
-                        </div>
-                      </div>
-                    </div>
-                    <Button 
-                      variant="outline" 
-                      className="group-hover:bg-blue-600 group-hover:text-white transition-colors"
-                      onClick={() => window.location.href = `/blog/${post.slug}`}
-                    >
-                      Read More
-                      <ArrowRight className="h-4 w-4 ml-2" />
-                    </Button>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+                    </PaginationItem>
+                    
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                      <PaginationItem key={page}>
+                        <PaginationLink
+                          href="#"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setCurrentPage(page);
+                          }}
+                          isActive={currentPage === page}
+                        >
+                          {page}
+                        </PaginationLink>
+                      </PaginationItem>
+                    ))}
+                    
+                    <PaginationItem>
+                      <PaginationNext 
+                        href="#"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+                        }}
+                        className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""}
+                      />
+                    </PaginationItem>
+                  </PaginationContent>
+                </Pagination>
+              )}
+            </>
           )}
         </div>
       </section>

@@ -11,12 +11,25 @@ const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const { data: post, isLoading, error } = useBlogPost(slug || "");
 
+  console.log('BlogPost component:', { slug, post, isLoading, error });
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-white">
         <Header />
         <div className="container mx-auto px-4 py-16">
-          <div className="text-center">Loading blog post...</div>
+          <div className="text-center">
+            <div className="animate-pulse">
+              <div className="h-8 bg-gray-200 rounded w-96 mx-auto mb-4"></div>
+              <div className="h-4 bg-gray-200 rounded w-64 mx-auto mb-8"></div>
+              <div className="aspect-[16/9] bg-gray-200 rounded-lg mb-8"></div>
+              <div className="space-y-4">
+                <div className="h-4 bg-gray-200 rounded"></div>
+                <div className="h-4 bg-gray-200 rounded"></div>
+                <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+              </div>
+            </div>
+          </div>
         </div>
         <Footer />
       </div>
@@ -24,6 +37,7 @@ const BlogPost = () => {
   }
 
   if (error || !post) {
+    console.error('BlogPost error:', error);
     return (
       <div className="min-h-screen bg-white">
         <Header />

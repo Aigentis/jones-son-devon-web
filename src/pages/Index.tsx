@@ -1,4 +1,3 @@
-
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
@@ -68,7 +67,7 @@ const Index = () => {
               <div className="space-y-4">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
                   North Devon's Trusted
-                  <span className="block text-orange-400 mt-2">Roofing Specialists</span>
+                  <span className="block text-orange-400 mt-2">Roofing & Property Specialists</span>
                 </h1>
                 <p className="text-lg sm:text-xl lg:text-2xl text-blue-100 leading-relaxed max-w-2xl mx-auto lg:mx-0">
                   Family-run business serving North Devon for over 10 years. 

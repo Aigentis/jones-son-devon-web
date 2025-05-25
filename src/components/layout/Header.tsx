@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Phone, Menu, X, Mail } from "lucide-react";
+import { Phone, Menu, X, Mail, MapPin } from "lucide-react";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,7 +26,10 @@ export const Header = () => {
               <span>info@jonesandsonroofing.uk</span>
             </div>
             <div className="flex items-center justify-between text-xs">
-              <span>📍 Serving North Devon & Beyond</span>
+              <span className="flex items-center">
+                <MapPin className="h-3 w-3 text-orange-400 mr-1" />
+                Serving North Devon & Beyond
+              </span>
               <div className="flex items-center space-x-1">
                 <Phone className="h-3 w-3 text-orange-400" />
                 <span className="font-semibold">01271 614 770</span>
@@ -41,7 +44,10 @@ export const Header = () => {
                 <Mail className="h-4 w-4 text-orange-400" />
                 <span>info@jonesandsonroofing.uk</span>
               </div>
-              <span>📍 Serving North Devon & Beyond</span>
+              <span className="flex items-center">
+                <MapPin className="h-4 w-4 text-orange-400 mr-1" />
+                Serving North Devon & Beyond
+              </span>
             </div>
             <div className="flex items-center space-x-2">
               <Phone className="h-4 w-4 text-orange-400" />

@@ -2,7 +2,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Phone, CheckCircle, Star, MapPin, Clock, Shield } from "lucide-react";
+import { Phone, CheckCircle, Star, MapPin, Clock, Shield, Play } from "lucide-react";
 import { Contact } from "@/components/sections/Contact";
 
 const Index = () => {
@@ -59,13 +59,13 @@ const Index = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 text-white overflow-hidden">
-        <div className="absolute inset-0 bg-black bg-opacity-30"></div>
-        <div className="relative container mx-auto px-4 py-16 lg:py-24">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+      <section className="relative min-h-screen bg-cover bg-center bg-no-repeat overflow-hidden" style={{backgroundImage: `url('/lovable-uploads/b08eef82-716b-4a9b-8c9c-698cd5876ed4.png')`}}>
+        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div className="relative container mx-auto px-4 py-16 lg:py-24 min-h-screen flex items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full">
             <div className="space-y-6 lg:space-y-8 text-center lg:text-left">
               <div className="space-y-4">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight text-white">
                   North Devon's Trusted
                   <span className="block text-orange-400 mt-2">Roofing & Property Specialists</span>
                 </h1>
@@ -88,26 +88,31 @@ const Index = () => {
               <div className="flex flex-wrap justify-center lg:justify-start gap-4 lg:gap-6 text-sm">
                 <div className="flex items-center bg-blue-800 bg-opacity-50 rounded-full px-4 py-2">
                   <CheckCircle className="h-4 w-4 text-orange-400 mr-2" />
-                  <span>10-Year Guarantee</span>
+                  <span className="text-white">10-Year Guarantee</span>
                 </div>
                 <div className="flex items-center bg-blue-800 bg-opacity-50 rounded-full px-4 py-2">
                   <CheckCircle className="h-4 w-4 text-orange-400 mr-2" />
-                  <span>Fully Insured</span>
+                  <span className="text-white">Fully Insured</span>
                 </div>
                 <div className="flex items-center bg-blue-800 bg-opacity-50 rounded-full px-4 py-2">
                   <CheckCircle className="h-4 w-4 text-orange-400 mr-2" />
-                  <span>Free Quotes</span>
+                  <span className="text-white">Free Quotes</span>
                 </div>
               </div>
             </div>
             
             <div className="order-first lg:order-last">
               <div className="relative">
-                <img 
-                  src="/lovable-uploads/3535d1c2-0265-4157-a4c3-17752daa5844.png" 
-                  alt="Jones & Son Property Maintenance Team"
-                  className="rounded-2xl shadow-2xl w-full h-auto max-w-lg mx-auto"
-                />
+                {/* Video Placeholder */}
+                <div className="relative bg-black bg-opacity-20 rounded-2xl shadow-2xl w-full h-auto max-w-lg mx-auto aspect-video flex items-center justify-center backdrop-blur-sm border-2 border-white border-opacity-30">
+                  <div className="text-center text-white">
+                    <div className="inline-flex p-4 bg-orange-500 rounded-full mb-4 hover:bg-orange-600 transition-colors cursor-pointer">
+                      <Play className="h-8 w-8 text-white" />
+                    </div>
+                    <p className="text-lg font-semibold">Watch Our Story</p>
+                    <p className="text-sm text-gray-300">Click to add your video</p>
+                  </div>
+                </div>
                 <div className="absolute -bottom-4 -right-4 bg-orange-500 text-white rounded-xl p-4 shadow-lg">
                   <div className="text-center">
                     <div className="text-2xl font-bold">10+</div>

@@ -36,14 +36,10 @@ export const Header = () => {
           {/* Logo */}
           <div className="flex items-center">
             <img 
-              src="/placeholder.svg" 
+              src="/lovable-uploads/e6465301-be66-41bb-a184-d68abe2683fa.png" 
               alt="Jones & Son Property Maintenance" 
-              className="h-12 w-auto"
+              className="h-16 w-auto"
             />
-            <div className="ml-3">
-              <h1 className="text-xl font-bold text-blue-600">Jones & Son</h1>
-              <p className="text-sm text-gray-600">Property Maintenance</p>
-            </div>
           </div>
 
           {/* Desktop Navigation */}

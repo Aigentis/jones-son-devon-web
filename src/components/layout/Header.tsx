@@ -28,7 +28,7 @@ export const Header = () => {
             <div className="flex items-center justify-between text-xs">
               <span>📍 Serving North Devon & Beyond</span>
               <div className="flex items-center space-x-1">
-                <Phone className="h-3 w-3" />
+                <Phone className="h-3 w-3 text-orange-400" />
                 <span className="font-semibold">01271 614 770</span>
               </div>
             </div>
@@ -44,7 +44,7 @@ export const Header = () => {
               <span>📍 Serving North Devon & Beyond</span>
             </div>
             <div className="flex items-center space-x-2">
-              <Phone className="h-4 w-4" />
+              <Phone className="h-4 w-4 text-orange-400" />
               <span className="font-semibold">01271 614 770</span>
             </div>
           </div>

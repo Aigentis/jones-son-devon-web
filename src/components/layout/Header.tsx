@@ -16,16 +16,33 @@ export const Header = () => {
 
   return (
     <header className="bg-white shadow-sm border-b sticky top-0 z-50">
-      {/* Top bar */}
-      <div className="bg-blue-600 text-white py-2">
-        <div className="container mx-auto px-4 flex justify-between items-center text-sm">
-          <div className="flex items-center space-x-4">
-            <span>📧 info@jonesandsonroofing.uk</span>
-            <span>📍 Serving North Devon & Beyond</span>
+      {/* Top bar - Fixed for mobile */}
+      <div className="bg-blue-600 text-white py-2 px-2">
+        <div className="container mx-auto px-2 sm:px-4">
+          {/* Mobile layout */}
+          <div className="flex flex-col space-y-1 sm:hidden">
+            <div className="flex items-center justify-center text-xs">
+              <span>📧 info@jonesandsonroofing.uk</span>
+            </div>
+            <div className="flex items-center justify-between text-xs">
+              <span>📍 Serving North Devon & Beyond</span>
+              <div className="flex items-center space-x-1">
+                <Phone className="h-3 w-3" />
+                <span className="font-semibold">01271 614 770</span>
+              </div>
+            </div>
           </div>
-          <div className="flex items-center space-x-2">
-            <Phone className="h-4 w-4" />
-            <span className="font-semibold">01271 614 770</span>
+          
+          {/* Desktop layout */}
+          <div className="hidden sm:flex justify-between items-center text-sm">
+            <div className="flex items-center space-x-4">
+              <span>📧 info@jonesandsonroofing.uk</span>
+              <span>📍 Serving North Devon & Beyond</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Phone className="h-4 w-4" />
+              <span className="font-semibold">01271 614 770</span>
+            </div>
           </div>
         </div>
       </div>
@@ -38,7 +55,7 @@ export const Header = () => {
             <img 
               src="/lovable-uploads/5da8d96d-ab3d-4a6e-9e44-74498b5c3e1d.png" 
               alt="Jones & Son Property Maintenance" 
-              className="h-16 w-auto"
+              className="h-12 sm:h-16 w-auto"
             />
           </div>
 

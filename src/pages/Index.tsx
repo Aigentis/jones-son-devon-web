@@ -99,7 +99,7 @@ const Index = () => {
             </div>
             <div className="lg:order-first">
               <img 
-                src="/api/placeholder/600/400" 
+                src="/lovable-uploads/3535d1c2-0265-4157-a4c3-17752daa5844.png" 
                 alt="Jones & Son Property Maintenance Team"
                 className="rounded-lg shadow-2xl w-full h-auto"
               />

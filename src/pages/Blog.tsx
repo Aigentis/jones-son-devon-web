@@ -1,60 +1,32 @@
 
+import { useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Calendar, Clock, User, ArrowRight } from "lucide-react";
+import { useBlogPosts, useCategories } from "@/hooks/useBlog";
 
 const Blog = () => {
-  const blogPosts = [
-    {
-      id: 1,
-      title: "5 Signs Your Guttering Needs Immediate Attention",
-      excerpt: "Don't wait until it's too late. Learn the warning signs that your guttering system needs professional repair or replacement.",
-      content: "Guttering problems can lead to serious structural damage if left untreated. Here are the key warning signs every homeowner should watch for...",
-      author: "Jones & Son Team",
-      date: "2024-01-15",
-      readTime: "5 min read",
-      category: "Maintenance Tips",
-      image: "/lovable-uploads/e6465301-be66-41bb-a184-d68abe2683fa.png"
-    },
-    {
-      id: 2,
-      title: "UPVC vs Timber: Choosing the Right Fascias & Soffits",
-      excerpt: "A comprehensive guide to help you decide between UPVC and timber for your fascias and soffits installation.",
-      content: "When it comes to fascias and soffits, the material choice can significantly impact both aesthetics and longevity...",
-      author: "Jones & Son Team",
-      date: "2024-01-10",
-      readTime: "7 min read",
-      category: "Product Guide",
-      image: "/lovable-uploads/35e81dc0-cacf-4de2-9650-101df24d9067.png"
-    },
-    {
-      id: 3,
-      title: "Winter Roof Maintenance: Protecting Your Property",
-      excerpt: "Essential winter maintenance tips to keep your roof in top condition throughout the harsh Devon weather.",
-      content: "Winter weather in North Devon can be particularly challenging for roofing systems. Here's how to prepare...",
-      author: "Jones & Son Team",
-      date: "2024-01-05",
-      readTime: "6 min read",
-      category: "Seasonal Care",
-      image: "/lovable-uploads/3535d1c2-0265-4157-a4c3-17752daa5844.png"
-    },
-    {
-      id: 4,
-      title: "The Benefits of Professional Roof Cleaning",
-      excerpt: "Discover why regular professional roof cleaning is essential for maintaining your property's value and structural integrity.",
-      content: "Many homeowners underestimate the importance of regular roof cleaning. Professional cleaning not only improves appearance...",
-      author: "Jones & Son Team",
-      date: "2023-12-28",
-      readTime: "4 min read",
-      category: "Services",
-      image: "/lovable-uploads/b08eef82-716b-4a9b-8c9c-698cd5876ed4.png"
-    }
-  ];
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  
+  const { data: blogPosts = [], isLoading: postsLoading } = useBlogPosts(selectedCategory);
+  const { data: categories = [], isLoading: categoriesLoading } = useCategories();
 
-  const categories = ["All", "Maintenance Tips", "Product Guide", "Seasonal Care", "Services"];
+  const allCategories = ["All", ...categories.map(cat => cat.name)];
+
+  if (postsLoading || categoriesLoading) {
+    return (
+      <div className="min-h-screen bg-white">
+        <Header />
+        <div className="container mx-auto px-4 py-16">
+          <div className="text-center">Loading blog posts...</div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -78,11 +50,12 @@ const Blog = () => {
       <section className="py-8 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap justify-center gap-3">
-            {categories.map((category) => (
+            {allCategories.map((category) => (
               <Button
                 key={category}
-                variant={category === "All" ? "default" : "outline"}
-                className={category === "All" ? "bg-blue-600 hover:bg-blue-700" : ""}
+                variant={category === selectedCategory ? "default" : "outline"}
+                className={category === selectedCategory ? "bg-blue-600 hover:bg-blue-700" : ""}
+                onClick={() => setSelectedCategory(category)}
               >
                 {category}
               </Button>
@@ -94,58 +67,75 @@ const Blog = () => {
       {/* Blog Posts */}
       <section className="py-16 lg:py-20">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
-            {blogPosts.map((post) => (
-              <Card key={post.id} className="overflow-hidden hover:shadow-xl transition-all duration-300 group">
-                <div className="aspect-[16/10] overflow-hidden">
-                  <img 
-                    src={post.image} 
-                    alt={post.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <CardHeader className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <Badge className="bg-orange-100 text-orange-800 hover:bg-orange-200">
-                      {post.category}
-                    </Badge>
-                    <div className="flex items-center text-sm text-gray-500">
-                      <Clock className="h-4 w-4 mr-1" />
-                      {post.readTime}
+          {blogPosts.length === 0 ? (
+            <div className="text-center py-16">
+              <h3 className="text-2xl font-semibold text-gray-600 mb-4">No blog posts found</h3>
+              <p className="text-gray-500">
+                {selectedCategory === "All" 
+                  ? "No blog posts have been published yet." 
+                  : `No posts found in the "${selectedCategory}" category.`}
+              </p>
+            </div>
+          ) : (
+            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
+              {blogPosts.map((post) => (
+                <Card key={post.id} className="overflow-hidden hover:shadow-xl transition-all duration-300 group">
+                  {post.featured_image && (
+                    <div className="aspect-[16/10] overflow-hidden">
+                      <img 
+                        src={post.featured_image} 
+                        alt={post.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
                     </div>
-                  </div>
-                  <CardTitle className="text-xl group-hover:text-blue-600 transition-colors">
-                    {post.title}
-                  </CardTitle>
-                  <CardDescription className="text-gray-600 leading-relaxed">
-                    {post.excerpt}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="pt-0">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center space-x-4 text-sm text-gray-500">
-                      <div className="flex items-center">
-                        <User className="h-4 w-4 mr-1" />
-                        {post.author}
-                      </div>
-                      <div className="flex items-center">
-                        <Calendar className="h-4 w-4 mr-1" />
-                        {new Date(post.date).toLocaleDateString('en-GB', {
-                          day: 'numeric',
-                          month: 'long',
-                          year: 'numeric'
-                        })}
+                  )}
+                  <CardHeader className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <Badge className="bg-orange-100 text-orange-800 hover:bg-orange-200">
+                        {post.category}
+                      </Badge>
+                      <div className="flex items-center text-sm text-gray-500">
+                        <Clock className="h-4 w-4 mr-1" />
+                        5 min read
                       </div>
                     </div>
-                  </div>
-                  <Button variant="outline" className="group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                    Read More
-                    <ArrowRight className="h-4 w-4 ml-2" />
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                    <CardTitle className="text-xl group-hover:text-blue-600 transition-colors">
+                      {post.title}
+                    </CardTitle>
+                    <CardDescription className="text-gray-600 leading-relaxed">
+                      {post.excerpt}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="pt-0">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center space-x-4 text-sm text-gray-500">
+                        <div className="flex items-center">
+                          <User className="h-4 w-4 mr-1" />
+                          Jones & Son Team
+                        </div>
+                        <div className="flex items-center">
+                          <Calendar className="h-4 w-4 mr-1" />
+                          {new Date(post.published_at || post.created_at).toLocaleDateString('en-GB', {
+                            day: 'numeric',
+                            month: 'long',
+                            year: 'numeric'
+                          })}
+                        </div>
+                      </div>
+                    </div>
+                    <Button 
+                      variant="outline" 
+                      className="group-hover:bg-blue-600 group-hover:text-white transition-colors"
+                      onClick={() => window.location.href = `/blog/${post.slug}`}
+                    >
+                      Read More
+                      <ArrowRight className="h-4 w-4 ml-2" />
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

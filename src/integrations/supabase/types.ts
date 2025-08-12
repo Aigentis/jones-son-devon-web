@@ -18,6 +18,7 @@ export type Database = {
         Row: {
           alt_text: string | null
           caption: string | null
+          category_id: string | null
           created_at: string | null
           file_path: string
           file_size: number | null
@@ -30,6 +31,7 @@ export type Database = {
         Insert: {
           alt_text?: string | null
           caption?: string | null
+          category_id?: string | null
           created_at?: string | null
           file_path: string
           file_size?: number | null
@@ -42,6 +44,7 @@ export type Database = {
         Update: {
           alt_text?: string | null
           caption?: string | null
+          category_id?: string | null
           created_at?: string | null
           file_path?: string
           file_size?: number | null
@@ -52,6 +55,13 @@ export type Database = {
           uploaded_by?: string | null
         }
         Relationships: [
+          {
+            foreignKeyName: "blog_images_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "blog_images_uploaded_by_fkey"
             columns: ["uploaded_by"]

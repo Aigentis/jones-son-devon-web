@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Phone, Menu, X, Mail, MapPin } from "lucide-react";
@@ -5,7 +6,7 @@ import { useAuth } from "@/contexts/AuthContext";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { user } = useAuth ? useAuth() : { user: null } as any;
+  const { user, signOut } = useAuth();
 
   const navigation = [
     { name: "Home", href: "/" },
@@ -16,6 +17,10 @@ export const Header = () => {
     { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/contact" },
   ];
+
+  const handleSignOut = async () => {
+    await signOut();
+  };
 
   return (
     <header className="bg-white shadow-sm border-b sticky top-0 z-50">
@@ -84,12 +89,16 @@ export const Header = () => {
               </a>
             ))}
           </nav>
-{/* CTA + Auth */}
-<div className="hidden lg:flex items-center space-x-4">
-  {/* Simple auth link; replace with account/logout when authenticated */}
-  <a href="/auth" className="text-gray-700 hover:text-blue-600 font-medium">Login</a>
-  <Button className="bg-blue-600 hover:bg-blue-700">Get Free Quote</Button>
-</div>
+
+          {/* CTA + Auth */}
+          <div className="hidden lg:flex items-center space-x-4">
+            {user ? (
+              <Button variant="outline" onClick={handleSignOut}>Logout</Button>
+            ) : (
+              <a href="/auth" className="text-gray-700 hover:text-blue-600 font-medium">Login</a>
+            )}
+            <Button className="bg-blue-600 hover:bg-blue-700">Get Free Quote</Button>
+          </div>
 
           {/* Mobile menu button */}
           <button
@@ -114,6 +123,15 @@ export const Header = () => {
                   {item.name}
                 </a>
               ))}
+              {user ? (
+                <Button variant="outline" onClick={handleSignOut} className="w-fit">
+                  Logout
+                </Button>
+              ) : (
+                <a href="/auth" className="text-gray-700 hover:text-blue-600 font-medium">
+                  Login
+                </a>
+              )}
               <Button className="bg-blue-600 hover:bg-blue-700 w-fit">
                 Get Free Quote
               </Button>

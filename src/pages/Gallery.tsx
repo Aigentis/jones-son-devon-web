@@ -7,7 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
-import { useGalleryImages, useUploadImage } from "@/hooks/useGallery";
+import { useCategories, useGalleryImages, useUploadImage } from "@/hooks/useGallery";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const setMeta = (name: string, content: string) => {
   let tag = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement | null;
@@ -32,6 +33,7 @@ const setCanonical = (href: string) => {
 export default function Gallery() {
   const { data: images = [], isLoading, error } = useGalleryImages();
   const { upload } = useUploadImage();
+  const { data: categories = [] } = useCategories();
   const { toast } = useToast();
 
   const [open, setOpen] = useState(false);
@@ -41,6 +43,8 @@ export default function Gallery() {
   const [caption, setCaption] = useState("");
   const [search, setSearch] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [filterCategory, setFilterCategory] = useState<string>("");
 
   useEffect(() => {
     const title = "Image Gallery | Jones & Son Property Maintenance";
@@ -49,13 +53,16 @@ export default function Gallery() {
     setCanonical(window.location.origin + "/gallery");
   }, []);
 
-  const filtered = useMemo(() => {
-    const q = search.toLowerCase().trim();
-    if (!q) return images;
-    return images.filter((img) =>
-      [img.filename, img.original_name, img.alt_text ?? "", img.caption ?? ""].some((v) => v.toLowerCase().includes(q))
+const filtered = useMemo(() => {
+  const q = search.toLowerCase().trim();
+  return images.filter((img) => {
+    const matchesText = !q || [img.filename, img.original_name, img.alt_text ?? "", img.caption ?? ""].some((v) =>
+      v.toLowerCase().includes(q)
     );
-  }, [images, search]);
+    const matchesCat = !filterCategory || img.category_id === filterCategory;
+    return matchesText && matchesCat;
+  });
+}, [images, search, filterCategory]);
 
   const handleSubmit = async () => {
     if (!file) {

@@ -11,8 +11,15 @@ export interface GalleryImage {
   file_size?: number | null;
   mime_type?: string | null;
   uploaded_by?: string | null;
+  category_id?: string | null;
   created_at: string;
   public_url: string;
+}
+
+export interface Category {
+  id: string;
+  name: string;
+  slug?: string | null;
 }
 
 export const useGalleryImages = () => {
@@ -36,6 +43,17 @@ export const useGalleryImages = () => {
   });
 };
 
+export const useCategories = () => {
+  return useQuery({
+    queryKey: ["gallery-categories"],
+    queryFn: async (): Promise<Category[]> => {
+      const { data, error } = await supabase.from("categories").select("id, name, slug").order("name");
+      if (error) throw error;
+      return (data as any) || [];
+    },
+  });
+};
+
 export const useUploadImage = () => {
   const queryClient = useQueryClient();
 
@@ -45,6 +63,7 @@ export const useUploadImage = () => {
       filenameBase: string;
       altText?: string;
       caption?: string;
+      categoryId?: string | null;
     }
   ) => {
     const ext = file.name.split(".").pop()?.toLowerCase() || "";
@@ -76,6 +95,7 @@ export const useUploadImage = () => {
         file_path: filePath,
         file_size: file.size,
         mime_type: file.type,
+        category_id: options.categoryId || null,
       });
 
     if (insertError) throw insertError;

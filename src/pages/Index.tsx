@@ -4,62 +4,51 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Phone, CheckCircle, Star, MapPin, Clock, Shield, Play } from "lucide-react";
 import { Contact } from "@/components/sections/Contact";
-
 const Index = () => {
-  const services = [
-    {
-      title: "Fascias & Soffits",
-      description: "Professional UPVC and timber fascias & soffits installation with 10-year guarantee.",
-      icon: <Shield className="h-8 w-8 text-blue-600" />,
-      price: "From £150/m"
-    },
-    {
-      title: "Guttering",
-      description: "Complete guttering solutions including repairs, cleaning, and replacements.",
-      icon: <CheckCircle className="h-8 w-8 text-blue-600" />,
-      price: "From £80/m"
-    },
-    {
-      title: "UPVC Cladding", 
-      description: "Modern cladding solutions for enhanced property protection and appearance.",
-      icon: <Shield className="h-8 w-8 text-blue-600" />,
-      price: "From £45/m²"
-    },
-    {
-      title: "Flat Roofing",
-      description: "Specialist flat roofing using EPDM rubber and modern weatherproof materials.",
-      icon: <CheckCircle className="h-8 w-8 text-blue-600" />,
-      price: "From £85/m²"
-    }
-  ];
-
-  const testimonials = [
-    {
-      name: "Sarah Johnson",
-      location: "Barnstaple",
-      rating: 5,
-      text: "Excellent service from Jones & Son. Professional, reliable and great value. Highly recommended!"
-    },
-    {
-      name: "Mike Davidson", 
-      location: "Bideford",
-      rating: 5,
-      text: "Top quality work on our guttering. Clean, efficient and finished exactly when promised."
-    },
-    {
-      name: "Emma Thompson",
-      location: "Ilfracombe", 
-      rating: 5,
-      text: "Very pleased with our new fascias and soffits. The team was courteous and professional throughout."
-    }
-  ];
-
-  return (
-    <div className="min-h-screen bg-white">
+  const services = [{
+    title: "Fascias & Soffits",
+    description: "Professional UPVC and timber fascias & soffits installation with 10-year guarantee.",
+    icon: <Shield className="h-8 w-8 text-blue-600" />,
+    price: "From £150/m"
+  }, {
+    title: "Guttering",
+    description: "Complete guttering solutions including repairs, cleaning, and replacements.",
+    icon: <CheckCircle className="h-8 w-8 text-blue-600" />,
+    price: "From £80/m"
+  }, {
+    title: "UPVC Cladding",
+    description: "Modern cladding solutions for enhanced property protection and appearance.",
+    icon: <Shield className="h-8 w-8 text-blue-600" />,
+    price: "From £45/m²"
+  }, {
+    title: "Flat Roofing",
+    description: "Specialist flat roofing using EPDM rubber and modern weatherproof materials.",
+    icon: <CheckCircle className="h-8 w-8 text-blue-600" />,
+    price: "From £85/m²"
+  }];
+  const testimonials = [{
+    name: "Sarah Johnson",
+    location: "Barnstaple",
+    rating: 5,
+    text: "Excellent service from Jones & Son. Professional, reliable and great value. Highly recommended!"
+  }, {
+    name: "Mike Davidson",
+    location: "Bideford",
+    rating: 5,
+    text: "Top quality work on our guttering. Clean, efficient and finished exactly when promised."
+  }, {
+    name: "Emma Thompson",
+    location: "Ilfracombe",
+    rating: 5,
+    text: "Very pleased with our new fascias and soffits. The team was courteous and professional throughout."
+  }];
+  return <div className="min-h-screen bg-white">
       <Header />
       
       {/* Hero Section */}
-      <section className="relative min-h-screen bg-cover bg-center bg-no-repeat overflow-hidden" style={{backgroundImage: `url('/lovable-uploads/b08eef82-716b-4a9b-8c9c-698cd5876ed4.png')`}}>
+      <section className="relative min-h-screen bg-cover bg-center bg-no-repeat overflow-hidden" style={{
+      backgroundImage: `url('/lovable-uploads/b08eef82-716b-4a9b-8c9c-698cd5876ed4.png')`
+    }}>
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         <div className="relative container mx-auto px-4 py-16 lg:py-24 min-h-screen flex items-center">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full">
@@ -139,8 +128,7 @@ const Index = () => {
           </div>
           
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-            {services.map((service, index) => (
-              <Card key={index} className="text-center hover:shadow-xl transition-all duration-300 border-0 shadow-lg group">
+            {services.map((service, index) => <Card key={index} className="text-center hover:shadow-xl transition-all duration-300 border-0 shadow-lg group">
                 <CardHeader className="pb-4">
                   <div className="flex justify-center mb-4">
                     <div className="p-3 bg-blue-50 rounded-full group-hover:bg-orange-50 transition-colors">
@@ -158,8 +146,7 @@ const Index = () => {
                     Learn More
                   </Button>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </section>
@@ -211,7 +198,7 @@ const Index = () => {
                   </div>
                   <h3 className="text-2xl font-bold mb-3">Emergency Call-Outs</h3>
                   <p className="text-blue-100 mb-6 leading-relaxed">Available for urgent roofing repairs across North Devon</p>
-                  <Button variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-blue-600 font-semibold">
+                  <Button variant="outline" className="border-2 border-white hover:bg-white font-semibold text-blue-600">
                     Call 01271 614 770
                   </Button>
                 </div>
@@ -247,13 +234,10 @@ const Index = () => {
           </div>
           
           <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-            {testimonials.map((testimonial, index) => (
-              <Card key={index} className="p-6 lg:p-8 border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+            {testimonials.map((testimonial, index) => <Card key={index} className="p-6 lg:p-8 border-0 shadow-lg hover:shadow-xl transition-all duration-300">
                 <CardContent className="space-y-4 p-0">
                   <div className="flex items-center justify-center space-x-1 mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 fill-orange-400 text-orange-400" />
-                    ))}
+                    {[...Array(testimonial.rating)].map((_, i) => <Star key={i} className="h-5 w-5 fill-orange-400 text-orange-400" />)}
                   </div>
                   <p className="text-gray-700 italic text-center leading-relaxed">"{testimonial.text}"</p>
                   <div className="text-center pt-4 border-t border-gray-100">
@@ -261,8 +245,7 @@ const Index = () => {
                     <p className="text-sm text-gray-500">{testimonial.location}</p>
                   </div>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </section>
@@ -271,8 +254,6 @@ const Index = () => {
       <Contact />
       
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Index;

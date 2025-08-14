@@ -3,40 +3,66 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { ContactPopup } from "@/components/ui/ContactPopup";
 import { MapPin, Phone, Clock } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Areas = () => {
   const primaryAreas = [
     {
       name: "Barnstaple",
+      slug: "barnstaple",
       description: "Our home base - providing comprehensive roofing services throughout Barnstaple and surrounding villages.",
       distance: "0 miles",
-      services: ["All Services Available", "Same-Day Emergency Response", "No Call-Out Charges"]
+      services: ["Fascias & Soffits", "Guttering", "Cladding", "Dry Verge", "Flat Roofs", "Roof Cleaning", "Property Maintenance"]
     },
     {
       name: "Bideford",
+      slug: "bideford",
       description: "Serving the historic port town of Bideford with reliable roofing and property maintenance.",
       distance: "8 miles",
-      services: ["All Services Available", "Next-Day Response", "Free Quotes"]
+      services: ["Fascias & Soffits", "Guttering", "Cladding", "Dry Verge", "Flat Roofs", "Roof Cleaning", "Property Maintenance"]
     },
     {
       name: "Ilfracombe",
+      slug: "ilfracombe",
       description: "Coastal roofing specialists for Ilfracombe, understanding the unique challenges of seaside properties.",
       distance: "12 miles",
-      services: ["Coastal Specialist Services", "Salt-Resistant Materials", "Weather-Resistant Solutions"]
+      services: ["Fascias & Soffits", "Guttering", "Cladding", "Dry Verge", "Flat Roofs", "Roof Cleaning", "Property Maintenance"]
     },
     {
       name: "Braunton",
+      slug: "braunton", 
       description: "Quality roofing services for Braunton and the surrounding rural communities.",
       distance: "6 miles",
-      services: ["Rural Property Specialist", "Agricultural Building Services", "Traditional & Modern Solutions"]
+      services: ["Fascias & Soffits", "Guttering", "Cladding", "Dry Verge", "Flat Roofs", "Roof Cleaning", "Property Maintenance"]
+    },
+    {
+      name: "South Molton",
+      slug: "south-molton",
+      description: "Premier roofing and property maintenance in this historic market town.",
+      distance: "14 miles",
+      services: ["Fascias & Soffits", "Guttering", "Cladding", "Dry Verge", "Flat Roofs", "Roof Cleaning", "Property Maintenance"]
+    },
+    {
+      name: "Great Torrington",
+      slug: "great-torrington",
+      description: "Trusted roofing and home care professionals for Great Torrington.",
+      distance: "16 miles",
+      services: ["Fascias & Soffits", "Guttering", "Cladding", "Dry Verge", "Flat Roofs", "Roof Cleaning", "Property Maintenance"]
+    },
+    {
+      name: "Fremington",
+      slug: "fremington",
+      description: "Local roofing and property maintenance professionals for Fremington.",
+      distance: "4 miles",
+      services: ["Fascias & Soffits", "Guttering", "Cladding", "Dry Verge", "Flat Roofs", "Roof Cleaning", "Property Maintenance"]
     }
   ];
 
   const additionalAreas = [
-    "South Molton", "Great Torrington", "Fremington", "Woolacombe", "Croyde", 
-    "Westward Ho!", "Appledore", "Instow", "Lynton", "Lynmouth", "Combe Martin",
-    "Mortehoe", "Lee", "Georgeham", "Saunton", "Umberleigh", "Kings Nympton",
+    "Woolacombe", "Croyde", "Westward Ho!", "Appledore", "Instow", "Lynton", "Lynmouth", 
+    "Combe Martin", "Mortehoe", "Lee", "Georgeham", "Saunton", "Umberleigh", "Kings Nympton",
     "Chulmleigh", "Winkleigh", "Atherington", "High Bickington", "Roborough"
   ];
 
@@ -79,7 +105,7 @@ const Areas = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
             {primaryAreas.map((area, index) => (
               <Card key={index} className="hover:shadow-lg transition-shadow">
                 <CardHeader>
@@ -92,7 +118,7 @@ const Areas = () => {
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-600 mb-6">{area.description}</p>
-                  <div className="space-y-2">
+                  <div className="space-y-2 mb-6">
                     <h4 className="font-semibold text-gray-900">Available Services:</h4>
                     <ul className="space-y-1">
                       {area.services.map((service, idx) => (
@@ -103,9 +129,21 @@ const Areas = () => {
                       ))}
                     </ul>
                   </div>
-                  <Button className="w-full mt-6 bg-blue-600 hover:bg-blue-700">
-                    Get Quote for {area.name}
-                  </Button>
+                  <div className="space-y-3">
+                    <Link to={`/areas/${area.slug}`}>
+                      <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                        Learn More About {area.name}
+                      </Button>
+                    </Link>
+                    <ContactPopup 
+                      location={area.name}
+                      trigger={
+                        <Button variant="outline" className="w-full">
+                          Get Quote for {area.name}
+                        </Button>
+                      }
+                    />
+                  </div>
                 </CardContent>
               </Card>
             ))}

@@ -71,7 +71,7 @@ const Index = () => {
                   <Phone className="h-5 w-5 mr-2" />
                   Call Now: 01271 614 770
                 </Button>
-                <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-blue-900 font-semibold text-lg px-8 py-4 h-auto">
+                <Button size="lg" className="bg-blue-600 text-white hover:bg-blue-700 font-semibold text-lg px-8 py-4 h-auto">
                   Get Free Quote
                 </Button>
               </div>

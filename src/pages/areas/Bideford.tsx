@@ -37,6 +37,19 @@ export default function Bideford() {
                 01271 614 770
               </Button>
             </div>
+            <div className="mt-8 text-center">
+              <p className="text-white/70 text-sm">
+                Designed and maintained by{" "}
+                <a 
+                  href="https://KelvinLee.io" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-orange-400 hover:text-orange-300 underline"
+                >
+                  Kelvin Lee
+                </a>
+              </p>
+            </div>
           </div>
         </div>
       </section>

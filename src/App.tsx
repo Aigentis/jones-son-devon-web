@@ -16,6 +16,8 @@ import Gallery from "./pages/Gallery";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import AuthPage from "./pages/Auth";
+import BlogManager from "./pages/admin/BlogManager";
+import BlogEditor from "./pages/admin/BlogEditor";
 import NotFound from "./pages/NotFound";
 
 // Area pages
@@ -56,6 +58,11 @@ const App = () => (
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/auth" element={<AuthPage />} />
+            
+            {/* Admin routes */}
+            <Route path="/admin/blog" element={<BlogManager />} />
+            <Route path="/admin/blog/new" element={<BlogEditor />} />
+            <Route path="/admin/blog/edit/:slug" element={<BlogEditor />} />
             
             {/* Area pages */}
             <Route path="/areas/barnstaple" element={<Barnstaple />} />

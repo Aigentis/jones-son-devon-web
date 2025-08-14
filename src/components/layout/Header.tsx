@@ -6,7 +6,7 @@ import { useAuth } from "@/contexts/AuthContext";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { user, signOut } = useAuth();
+  const { user, signOut, isAdmin } = useAuth();
 
   const navigation = [
     { name: "Home", href: "/" },
@@ -93,7 +93,14 @@ export const Header = () => {
           {/* CTA + Auth */}
           <div className="hidden lg:flex items-center space-x-4">
             {user ? (
-              <Button variant="outline" onClick={handleSignOut}>Logout</Button>
+              <div className="flex items-center space-x-2">
+                {isAdmin && (
+                  <a href="/admin/blog" className="text-gray-700 hover:text-blue-600 font-medium">
+                    Admin
+                  </a>
+                )}
+                <Button variant="outline" onClick={handleSignOut}>Logout</Button>
+              </div>
             ) : (
               <a href="/auth" className="text-gray-700 hover:text-blue-600 font-medium">Login</a>
             )}
@@ -124,9 +131,16 @@ export const Header = () => {
                 </a>
               ))}
               {user ? (
-                <Button variant="outline" onClick={handleSignOut} className="w-fit">
-                  Logout
-                </Button>
+                <div className="flex flex-col space-y-2">
+                  {isAdmin && (
+                    <a href="/admin/blog" className="text-gray-700 hover:text-blue-600 font-medium">
+                      Admin
+                    </a>
+                  )}
+                  <Button variant="outline" onClick={handleSignOut} className="w-fit">
+                    Logout
+                  </Button>
+                </div>
               ) : (
                 <a href="/auth" className="text-gray-700 hover:text-blue-600 font-medium">
                   Login

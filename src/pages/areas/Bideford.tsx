@@ -32,7 +32,7 @@ export default function Bideford() {
                   </Button>
                 }
               />
-              <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-blue-900 font-semibold text-lg px-8 py-4 h-auto">
+              <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold text-lg px-8 py-4 h-auto">
                 <Phone className="h-5 w-5 mr-2" />
                 01271 614 770
               </Button>

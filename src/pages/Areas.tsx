@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ContactPopup } from "@/components/ui/ContactPopup";
 import { MapPin, Phone, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
+import northDevonHero from "@/assets/north-devon-hero.jpg";
 
 const Areas = () => {
   const primaryAreas = [
@@ -71,12 +72,16 @@ const Areas = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl lg:text-6xl font-bold mb-6">
+      <section 
+        className="relative min-h-[80vh] flex items-center justify-center bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${northDevonHero})` }}
+      >
+        <div className="absolute inset-0 bg-black/50"></div>
+        <div className="relative z-10 container mx-auto px-4 text-center text-white">
+          <h1 className="text-4xl lg:text-6xl font-bold mb-6 text-shadow-lg">
             Areas We Cover
           </h1>
-          <p className="text-xl lg:text-2xl text-blue-100 max-w-3xl mx-auto mb-8">
+          <p className="text-xl lg:text-2xl max-w-3xl mx-auto mb-8 text-shadow">
             Proudly serving North Devon and surrounding areas with professional 
             roofing and property maintenance services.
           </p>

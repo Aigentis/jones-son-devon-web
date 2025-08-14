@@ -7,24 +7,29 @@ import { Contact } from "@/components/sections/Contact";
 const Index = () => {
   const services = [{
     title: "Fascias & Soffits",
-    description: "Professional UPVC and timber fascias & soffits installation with 10-year guarantee.",
+    description: "Your roofline is your home's first defense against the elements. Our professional UPVC and timber fascias and soffits not only protect your roof from water damage and pests but also give your home a clean, modern finish.",
     icon: <Shield className="h-8 w-8 text-blue-600" />,
     price: "From £150/m"
   }, {
     title: "Guttering",
-    description: "Complete guttering solutions including repairs, cleaning, and replacements.",
+    description: "A well-maintained guttering system is crucial for preventing damp and foundation issues. We provide a full range of guttering services, from clearing blockages to complete replacements.",
     icon: <CheckCircle className="h-8 w-8 text-blue-600" />,
     price: "From £80/m"
   }, {
     title: "UPVC Cladding",
-    description: "Modern cladding solutions for enhanced property protection and appearance.",
+    description: "Update your home's exterior with our durable and low-maintenance UPVC cladding. It provides an extra layer of protection against North Devon's weather and improves your home's insulation.",
     icon: <Shield className="h-8 w-8 text-blue-600" />,
     price: "From £45/m²"
   }, {
     title: "Flat Roofing",
-    description: "Specialist flat roofing using EPDM rubber and modern weatherproof materials.",
+    description: "We specialize in modern flat roofing solutions that are built to last. Using high-performance materials like EPDM rubber and advanced weatherproof systems.",
     icon: <CheckCircle className="h-8 w-8 text-blue-600" />,
     price: "From £85/m²"
+  }, {
+    title: "Property Maintenance",
+    description: "Keeping your home in top condition can be a challenge. We offer a comprehensive property maintenance service to handle all those essential tasks, from minor repairs to general upkeep.",
+    icon: <Shield className="h-8 w-8 text-blue-600" />,
+    price: "Contact Us"
   }];
   const testimonials = [{
     name: "Sarah Johnson",
@@ -119,11 +124,13 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12 lg:mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Our Professional Services
+              Our Professional Services for North Devon Homes
             </h2>
             <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Comprehensive property maintenance solutions across North Devon. 
-              All work comes with our 10-year guarantee and full insurance coverage.
+              At Jones and Son Roofing and Property Maintenance, we provide comprehensive roofing and exterior solutions designed to protect and enhance your home. As a trusted local company, we take pride in our expert craftsmanship and commitment to quality.
+            </p>
+            <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mt-4">
+              All of our work is backed by our 10-year guarantee and full insurance coverage, so you can have complete peace of mind.
             </p>
           </div>
           
@@ -143,7 +150,7 @@ const Index = () => {
                 <CardContent className="pt-0">
                   <p className="text-gray-600 mb-6 leading-relaxed">{service.description}</p>
                   <Button variant="outline" size="sm" className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white">
-                    Learn More
+                    Request a Free Quote
                   </Button>
                 </CardContent>
               </Card>)}

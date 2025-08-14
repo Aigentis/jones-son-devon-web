@@ -140,9 +140,7 @@ const Index = () => {
                     </div>
                   </div>
                   <CardTitle className="text-xl text-gray-900">{service.title}</CardTitle>
-                  <CardDescription className="text-orange-600 font-bold text-lg">
-                    {service.price}
-                  </CardDescription>
+                  
                 </CardHeader>
                 <CardContent className="pt-0">
                   <p className="text-gray-600 mb-6 leading-relaxed">{service.description}</p>

@@ -1,15 +1,17 @@
 
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Calendar, Clock, User, ArrowLeft, Phone, Mail } from "lucide-react";
+import { Calendar, Clock, User, ArrowLeft, Phone, Mail, Edit } from "lucide-react";
 import { useBlogPost } from "@/hooks/useBlog";
+import { useAuth } from "@/contexts/AuthContext";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const { data: post, isLoading, error } = useBlogPost(slug || "");
+  const { isAdmin } = useAuth();
 
   console.log('BlogPost component:', { slug, post, isLoading, error });
 
@@ -78,9 +80,19 @@ const BlogPost = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="mb-6">
-              <Badge className="bg-orange-100 text-orange-800 hover:bg-orange-200 mb-4">
-                {post.category}
-              </Badge>
+              <div className="flex justify-between items-start mb-4">
+                <Badge className="bg-orange-100 text-orange-800 hover:bg-orange-200">
+                  {post.category}
+                </Badge>
+                {isAdmin && (
+                  <Button asChild size="sm" variant="outline">
+                    <Link to={`/admin/blog/edit/${post.slug}`}>
+                      <Edit className="h-4 w-4 mr-2" />
+                      Edit Post
+                    </Link>
+                  </Button>
+                )}
+              </div>
               <h1 className="text-3xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
                 {post.title}
               </h1>

@@ -81,7 +81,7 @@ const BlogPost = () => {
           <div className="max-w-4xl mx-auto">
             <div className="mb-6">
               <div className="flex justify-between items-start mb-4">
-                <Badge className="bg-orange-100 text-orange-800 hover:bg-orange-200">
+                <Badge className="bg-orange-500 text-white hover:bg-orange-600">
                   {post.category}
                 </Badge>
                 {isAdmin && (

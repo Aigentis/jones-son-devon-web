@@ -9,6 +9,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { useToast } from "@/hooks/use-toast";
 import { useCategories, useGalleryImages, useUploadImage } from "@/hooks/useGallery";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useAuth } from "@/contexts/AuthContext";
 
 const setMeta = (name: string, content: string) => {
   let tag = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement | null;
@@ -35,6 +36,7 @@ export default function Gallery() {
   const { upload } = useUploadImage();
   const { data: categories = [] } = useCategories();
   const { toast } = useToast();
+  const { user } = useAuth();
 
   const [open, setOpen] = useState(false);
   const [file, setFile] = useState<File | null>(null);
@@ -106,59 +108,61 @@ const filtered = useMemo(() => {
                 aria-label="Search images"
               />
             </div>
-            <Dialog open={open} onOpenChange={setOpen}>
-              <DialogTrigger asChild>
-                <Button>Upload Image</Button>
-              </DialogTrigger>
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Upload Image</DialogTitle>
-                </DialogHeader>
-                <div className="space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="file">Image file</Label>
-                    <Input
-                      id="file"
-                      type="file"
-                      accept="image/*"
-                      onChange={(e) => setFile(e.target.files?.[0] || null)}
-                    />
+            {user && (
+              <Dialog open={open} onOpenChange={setOpen}>
+                <DialogTrigger asChild>
+                  <Button>Upload Image</Button>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>Upload Image</DialogTitle>
+                  </DialogHeader>
+                  <div className="space-y-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="file">Image file</Label>
+                      <Input
+                        id="file"
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => setFile(e.target.files?.[0] || null)}
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="name">Filename (no extension)</Label>
+                      <Input
+                        id="name"
+                        placeholder="e.g. barnstaple-roof-replacement"
+                        value={filenameBase}
+                        onChange={(e) => setFilenameBase(e.target.value)}
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="alt">Alt text</Label>
+                      <Input
+                        id="alt"
+                        placeholder="Describe the image for accessibility and SEO"
+                        value={altText}
+                        onChange={(e) => setAltText(e.target.value)}
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="caption">Caption (optional)</Label>
+                      <Input
+                        id="caption"
+                        placeholder="Short caption to show under the image"
+                        value={caption}
+                        onChange={(e) => setCaption(e.target.value)}
+                      />
+                    </div>
+                    <div className="flex justify-end gap-2 pt-2">
+                      <Button variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
+                      <Button onClick={handleSubmit} disabled={isSubmitting}>{isSubmitting ? "Uploading..." : "Upload"}</Button>
+                    </div>
+                    <p className="text-xs text-muted-foreground">Note: Uploads require admin login due to security policies.</p>
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Filename (no extension)</Label>
-                    <Input
-                      id="name"
-                      placeholder="e.g. barnstaple-roof-replacement"
-                      value={filenameBase}
-                      onChange={(e) => setFilenameBase(e.target.value)}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="alt">Alt text</Label>
-                    <Input
-                      id="alt"
-                      placeholder="Describe the image for accessibility and SEO"
-                      value={altText}
-                      onChange={(e) => setAltText(e.target.value)}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="caption">Caption (optional)</Label>
-                    <Input
-                      id="caption"
-                      placeholder="Short caption to show under the image"
-                      value={caption}
-                      onChange={(e) => setCaption(e.target.value)}
-                    />
-                  </div>
-                  <div className="flex justify-end gap-2 pt-2">
-                    <Button variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
-                    <Button onClick={handleSubmit} disabled={isSubmitting}>{isSubmitting ? "Uploading..." : "Upload"}</Button>
-                  </div>
-                  <p className="text-xs text-muted-foreground">Note: Uploads require admin login due to security policies.</p>
-                </div>
-              </DialogContent>
-            </Dialog>
+                </DialogContent>
+              </Dialog>
+            )}
           </div>
 
           {isLoading && <p>Loading images...</p>}

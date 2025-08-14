@@ -46,13 +46,13 @@ export const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-6">Areas We Cover</h4>
             <ul className="space-y-3 text-gray-400">
-              <li>Barnstaple</li>
-              <li>Bideford</li>
-              <li>Ilfracombe</li>
-              <li>Braunton</li>
-              <li>South Molton</li>
-              <li>Great Torrington</li>
-              <li>Fremington</li>
+              <li><a href="/areas/barnstaple" className="hover:text-white transition-colors">Barnstaple</a></li>
+              <li><a href="/areas/bideford" className="hover:text-white transition-colors">Bideford</a></li>
+              <li><a href="/areas/ilfracombe" className="hover:text-white transition-colors">Ilfracombe</a></li>
+              <li><a href="/areas/braunton" className="hover:text-white transition-colors">Braunton</a></li>
+              <li><a href="/areas/south-molton" className="hover:text-white transition-colors">South Molton</a></li>
+              <li><a href="/areas/great-torrington" className="hover:text-white transition-colors">Great Torrington</a></li>
+              <li><a href="/areas/fremington" className="hover:text-white transition-colors">Fremington</a></li>
               <li>+ Many More</li>
             </ul>
           </div>

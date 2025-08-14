@@ -15,10 +15,10 @@ export default function Bideford() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Bideford's Local Roofing & Property Maintenance Professionals
+              Trusted Roofing & Exterior Services in Bideford
             </h1>
             <p className="text-xl text-gray-600 mb-8">
-              With over 20 years of experience, Jones & Son is your local expert for all roofing and property maintenance needs. We are proud to serve the Bideford community and are committed to providing the highest quality workmanship to keep your home in top condition.
+              Hello Bideford! As a local company with over 20 years of experience, Jones & Son Roofing is your go-to provider for all roofing and exterior services. We are dedicated to delivering professional, high-quality workmanship to the Bideford community, ensuring your home is well-protected against the elements that come with living near the River Torridge and the coast.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <ContactPopup 
@@ -47,8 +47,7 @@ export default function Bideford() {
             </div>
             <h2 className="text-2xl font-bold mb-4">Quality Guarantee</h2>
             <p className="text-lg">
-              We stand by the quality of our work. All our roofing work is backed by a 10-year warranty, 
-              and every project we complete is supported by our full workmanship guarantee.
+              We are committed to quality and stand behind our work. That's why we offer a 10-year warranty on all roofing work and a full workmanship guarantee on every service we provide.
             </p>
           </div>
         </div>
@@ -63,27 +62,31 @@ export default function Bideford() {
               {[
                 {
                   title: "Fascias & Soffits",
-                  description: "Durable UPVC installations that protect your roofline and provide a clean, long-lasting finish for your home."
+                  description: "Durable UPVC fascias and soffits that protect your roofline and give your home a fresh, clean look."
                 },
                 {
                   title: "Guttering",
-                  description: "Reliable guttering systems that effectively manage rainfall and protect your property from water damage."
+                  description: "Reliable guttering installation and repair services designed to prevent water damage to your property's foundation."
                 },
                 {
                   title: "Cladding",
-                  description: "High-quality exterior cladding that enhances your home's appearance, improves insulation, and provides a durable protective layer."
+                  description: "Professional exterior cladding that improves insulation and transforms your home's aesthetic with a modern, protective finish."
                 },
                 {
                   title: "Dry Verge",
-                  description: "A secure, maintenance-free solution that protects your roof's verges from wind uplift and replaces old, damaged mortar."
+                  description: "A secure, maintenance-free solution that protects your roof's verges from wind uplift and pests without the need for mortar."
                 },
                 {
                   title: "Flat Roofs",
-                  description: "Expert installation and repair for garages and extensions using high-performance, watertight materials."
+                  description: "Expert installation and repair using durable materials like GRP and EPDM, ensuring a watertight and long-lasting result."
                 },
                 {
                   title: "Roof Cleaning",
-                  description: "Gentle and safe moss and algae removal that restores your roof's appearance without causing damage to your tiles."
+                  description: "Safe and gentle cleaning services that remove damaging moss and lichen, restoring your roof's appearance and lifespan."
+                },
+                {
+                  title: "Property Maintenance",
+                  description: "Comprehensive services for general home upkeep, from exterior painting to minor repairs, all handled by a trusted local team."
                 }
               ].map((service, index) => (
                 <Card key={index} className="h-full">

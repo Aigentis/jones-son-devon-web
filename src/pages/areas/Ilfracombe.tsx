@@ -15,10 +15,10 @@ export default function Ilfracombe() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Ilfracombe's Local Roofing & Property Maintenance Professionals
+              Your Ilfracombe Roofing & Exterior Specialists
             </h1>
             <p className="text-xl text-gray-600 mb-8">
-              With over 20 years of experience, Jones & Son is your local expert for all roofing and property maintenance needs. We are proud to serve the Ilfracombe community and are committed to providing the highest quality workmanship to keep your home in top condition.
+              Welcome to Jones & Son Roofing, the trusted roofing and exterior specialists for Ilfracombe. With over 20 years of experience, we have a deep understanding of the challenges that coastal properties face. Our services are specifically designed to provide durable, weather-resistant solutions that protect your home from the sea air and high winds, all while enhancing its curb appeal.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <ContactPopup 
@@ -63,27 +63,31 @@ export default function Ilfracombe() {
               {[
                 {
                   title: "Fascias & Soffits",
-                  description: "Durable UPVC installations that protect your roofline and provide a clean, long-lasting finish for your home."
+                  description: "Weather-resistant UPVC installations that are specifically chosen to withstand coastal conditions and protect your roofline."
                 },
                 {
                   title: "Guttering",
-                  description: "Reliable guttering systems that effectively manage rainfall and protect your property from water damage."
+                  description: "High-performance guttering systems to effectively manage heavy coastal rainfall and prevent water damage."
                 },
                 {
                   title: "Cladding",
-                  description: "High-quality exterior cladding that enhances your home's appearance, improves insulation, and provides a durable protective layer."
+                  description: "Durable exterior cladding that provides an essential layer of protection and improves insulation for properties exposed to the elements."
                 },
                 {
                   title: "Dry Verge",
-                  description: "A secure, maintenance-free solution that protects your roof's verges from wind uplift and replaces old, damaged mortar."
+                  description: "A secure, wind-resistant dry verge system that protects your roof from uplift, a perfect solution for coastal properties."
                 },
                 {
                   title: "Flat Roofs",
-                  description: "Expert installation and repair for garages and extensions using high-performance, watertight materials."
+                  description: "Expert installation and repair using robust materials that are proven to be watertight and long-lasting in a coastal environment."
                 },
                 {
                   title: "Roof Cleaning",
-                  description: "Gentle and safe moss and algae removal that restores your roof's appearance without causing damage to your tiles."
+                  description: "Specialized cleaning to safely remove moss and algae that are common in coastal and damp conditions, extending your roof's life."
+                },
+                {
+                  title: "Property Maintenance",
+                  description: "A full range of services for general home upkeep, ensuring your property is cared for and looks its best year-round."
                 }
               ].map((service, index) => (
                 <Card key={index} className="h-full">

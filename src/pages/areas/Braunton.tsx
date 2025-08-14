@@ -15,10 +15,10 @@ export default function Braunton() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Braunton's Local Roofing & Property Maintenance Professionals
+              Braunton's Local Experts for Roofing & Home Maintenance
             </h1>
             <p className="text-xl text-gray-600 mb-8">
-              With over 20 years of experience, Jones & Son is your local expert for all roofing and property maintenance needs. We are proud to serve the Braunton community and are committed to providing the highest quality workmanship to keep your home in top condition.
+              Hello Braunton! As your trusted local experts with over 20 years of experience, Jones & Son Roofing is dedicated to providing the highest quality roofing and home maintenance services to the community. We understand the unique needs of properties in Braunton, from the village centre to the homes near the dunes, and offer durable solutions designed to withstand both coastal and inland conditions.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <ContactPopup 
@@ -47,8 +47,7 @@ export default function Braunton() {
             </div>
             <h2 className="text-2xl font-bold mb-4">Quality Guarantee</h2>
             <p className="text-lg">
-              We stand by the quality of our work. All our roofing work is backed by a 10-year warranty, 
-              and every project we complete is supported by our full workmanship guarantee.
+              We are committed to quality and stand behind our work. That's why we offer a 10-year warranty on all roofing work and a full workmanship guarantee on every service we provide.
             </p>
           </div>
         </div>
@@ -63,27 +62,31 @@ export default function Braunton() {
               {[
                 {
                   title: "Fascias & Soffits",
-                  description: "Durable UPVC installations that protect your roofline and provide a clean, long-lasting finish for your home."
+                  description: "High-quality UPVC installations that provide a clean, modern finish and protect your roofline from the elements."
                 },
                 {
                   title: "Guttering",
-                  description: "Reliable guttering systems that effectively manage rainfall and protect your property from water damage."
+                  description: "Professional guttering systems that effectively manage rainfall, a crucial defense for homes in an area exposed to both coastal and rural weather."
                 },
                 {
                   title: "Cladding",
-                  description: "High-quality exterior cladding that enhances your home's appearance, improves insulation, and provides a durable protective layer."
+                  description: "Durable and stylish exterior cladding that enhances your home's aesthetic and provides an extra layer of insulation."
                 },
                 {
                   title: "Dry Verge",
-                  description: "A secure, maintenance-free solution that protects your roof's verges from wind uplift and replaces old, damaged mortar."
+                  description: "A maintenance-free, interlocking system that securely holds your roof tiles in place, offering superior protection against wind uplift."
                 },
                 {
                   title: "Flat Roofs",
-                  description: "Expert installation and repair for garages and extensions using high-performance, watertight materials."
+                  description: "Expert installation and repair of flat roofs for garages and extensions using high-performance, watertight materials."
                 },
                 {
                   title: "Roof Cleaning",
-                  description: "Gentle and safe moss and algae removal that restores your roof's appearance without causing damage to your tiles."
+                  description: "Gentle and safe moss and algae removal that rejuvenates your roof's appearance without causing damage."
+                },
+                {
+                  title: "Property Maintenance",
+                  description: "A wide range of services for general home upkeep, from exterior painting to minor repairs, all handled by our professional team."
                 }
               ].map((service, index) => (
                 <Card key={index} className="h-full">

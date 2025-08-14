@@ -15,10 +15,10 @@ export default function GreatTorrington() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Great Torrington's Local Roofing & Property Maintenance Professionals
+              Great Torrington's Trusted Roofing & Home Care Professionals
             </h1>
             <p className="text-xl text-gray-600 mb-8">
-              With over 20 years of experience, Jones & Son is your local expert for all roofing and property maintenance needs. We are proud to serve the Great Torrington community and are committed to providing the highest quality workmanship to keep your home in top condition.
+              Welcome, Great Torrington! With over 20 years of experience, Jones & Son Roofing is your trusted partner for all roofing and property maintenance needs in this historic town. We are proud to serve the local community and understand the care and attention that properties in Great Torrington require to withstand the elements from their elevated position.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <ContactPopup 
@@ -63,27 +63,31 @@ export default function GreatTorrington() {
               {[
                 {
                   title: "Fascias & Soffits",
-                  description: "Durable UPVC installations that protect your roofline and provide a clean, long-lasting finish for your home."
+                  description: "High-quality UPVC installations that protect your roofline and provide a durable, low-maintenance finish."
                 },
                 {
                   title: "Guttering",
-                  description: "Reliable guttering systems that effectively manage rainfall and protect your property from water damage."
+                  description: "Professional guttering systems designed to handle rainfall and protect your property from water damage."
                 },
                 {
                   title: "Cladding",
-                  description: "High-quality exterior cladding that enhances your home's appearance, improves insulation, and provides a durable protective layer."
+                  description: "Durable and energy-efficient cladding to update your home's exterior and provide an extra layer of protection."
                 },
                 {
                   title: "Dry Verge",
-                  description: "A secure, maintenance-free solution that protects your roof's verges from wind uplift and replaces old, damaged mortar."
+                  description: "A secure, maintenance-free solution that protects your roof from wind uplift and replaces old, crumbling mortar."
                 },
                 {
                   title: "Flat Roofs",
-                  description: "Expert installation and repair for garages and extensions using high-performance, watertight materials."
+                  description: "Expert installation and repair using watertight materials, ensuring a reliable solution for your garage or extension."
                 },
                 {
                   title: "Roof Cleaning",
-                  description: "Gentle and safe moss and algae removal that restores your roof's appearance without causing damage to your tiles."
+                  description: "Safe and effective moss and lichen removal that restores your roof's appearance and helps to extend its lifespan."
+                },
+                {
+                  title: "Property Maintenance",
+                  description: "A comprehensive range of services for general home upkeep, from exterior painting to minor repairs, all handled by our professional team."
                 }
               ].map((service, index) => (
                 <Card key={index} className="h-full">

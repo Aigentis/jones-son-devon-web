@@ -15,10 +15,10 @@ export default function SouthMolton() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              South Molton's Local Roofing & Property Maintenance Professionals
+              South Molton's Premier Roofing & Property Maintenance Services
             </h1>
             <p className="text-xl text-gray-600 mb-8">
-              With over 20 years of experience, Jones & Son is your local expert for all roofing and property maintenance needs. We are proud to serve the South Molton community and are committed to providing the highest quality workmanship to keep your home in top condition.
+              Welcome, South Molton! With over 20 years of experience, Jones & Son Roofing is the premier choice for roofing and property maintenance in this historic market town. We are committed to delivering professional, reliable services that respect the heritage of the area while providing modern-day performance and protection for your home.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <ContactPopup 
@@ -47,8 +47,7 @@ export default function SouthMolton() {
             </div>
             <h2 className="text-2xl font-bold mb-4">Quality Guarantee</h2>
             <p className="text-lg">
-              We stand by the quality of our work. All our roofing work is backed by a 10-year warranty, 
-              and every project we complete is supported by our full workmanship guarantee.
+              We believe in the quality of our work. All our roofing work is backed by a 10-year warranty, and every project we complete is supported by our full workmanship guarantee.
             </p>
           </div>
         </div>
@@ -63,27 +62,31 @@ export default function SouthMolton() {
               {[
                 {
                   title: "Fascias & Soffits",
-                  description: "Durable UPVC installations that protect your roofline and provide a clean, long-lasting finish for your home."
+                  description: "Durable UPVC replacements that protect your roofline and blend seamlessly with the traditional aesthetic of the town."
                 },
                 {
                   title: "Guttering",
-                  description: "Reliable guttering systems that effectively manage rainfall and protect your property from water damage."
+                  description: "Reliable systems to ensure proper drainage, a crucial defense against damp and other water-related issues common in older properties."
                 },
                 {
                   title: "Cladding",
-                  description: "High-quality exterior cladding that enhances your home's appearance, improves insulation, and provides a durable protective layer."
+                  description: "Modern cladding solutions that provide improved insulation and a fresh, protective layer for your home's exterior."
                 },
                 {
                   title: "Dry Verge",
-                  description: "A secure, maintenance-free solution that protects your roof's verges from wind uplift and replaces old, damaged mortar."
+                  description: "A clean, secure, and long-lasting alternative to traditional mortar verges, perfect for updating your roof's finish."
                 },
                 {
                   title: "Flat Roofs",
-                  description: "Expert installation and repair for garages and extensions using high-performance, watertight materials."
+                  description: "Expert installation and repair for garages and extensions using advanced, watertight materials for a lasting solution."
                 },
                 {
                   title: "Roof Cleaning",
-                  description: "Gentle and safe moss and algae removal that restores your roof's appearance without causing damage to your tiles."
+                  description: "Careful and safe cleaning to preserve the integrity of your roof tiles while removing unsightly moss and lichen."
+                },
+                {
+                  title: "Property Maintenance",
+                  description: "A wide range of services for general home upkeep, ensuring your South Molton property remains in excellent condition."
                 }
               ].map((service, index) => (
                 <Card key={index} className="h-full">

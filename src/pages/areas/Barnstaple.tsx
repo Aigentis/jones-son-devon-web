@@ -15,10 +15,10 @@ export default function Barnstaple() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Barnstaple's Local Roofing & Property Maintenance Professionals
+              Your Local Roofing & Property Maintenance Experts in Barnstaple
             </h1>
             <p className="text-xl text-gray-600 mb-8">
-              With over 20 years of experience, Jones & Son is your local expert for all roofing and property maintenance needs. We are proud to serve the Barnstaple community and are committed to providing the highest quality workmanship to keep your home in top condition.
+              Welcome to Jones & Son Roofing, your trusted partner for all roofing and property maintenance needs in Barnstaple. With over 20 years of experience, we have proudly served countless homeowners, delivering exceptional quality and reliability. We understand the specific needs of Barnstaple properties and are committed to keeping your home protected, beautiful, and well-maintained.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <ContactPopup 
@@ -47,8 +47,7 @@ export default function Barnstaple() {
             </div>
             <h2 className="text-2xl font-bold mb-4">Quality Guarantee</h2>
             <p className="text-lg">
-              We stand by the quality of our work. All our roofing work is backed by a 10-year warranty, 
-              and every project we complete is supported by our full workmanship guarantee.
+              We offer a comprehensive range of services, all backed by our quality promise. All roofing work comes with a 10-year warranty, and every project we complete is backed by our full workmanship guarantee.
             </p>
           </div>
         </div>
@@ -63,27 +62,31 @@ export default function Barnstaple() {
               {[
                 {
                   title: "Fascias & Soffits",
-                  description: "Durable UPVC installations that protect your roofline and provide a clean, long-lasting finish for your home."
+                  description: "High-quality UPVC installations that protect your roofline from water damage while dramatically improving your home's curb appeal."
                 },
                 {
                   title: "Guttering",
-                  description: "Reliable guttering systems that effectively manage rainfall and protect your property from water damage."
+                  description: "Expert installation, repair, and cleaning services to ensure your home's foundation is protected from rainwater runoff."
                 },
                 {
                   title: "Cladding",
-                  description: "High-quality exterior cladding that enhances your home's appearance, improves insulation, and provides a durable protective layer."
+                  description: "Durable and stylish exterior cladding solutions that enhance insulation and provide a modern, protective layer for your home's exterior walls."
                 },
                 {
                   title: "Dry Verge",
-                  description: "A secure, maintenance-free solution that protects your roof's verges from wind uplift and replaces old, damaged mortar."
+                  description: "A maintenance-free, interlocking cap system that securely protects your roof's verge, a superior alternative to traditional mortar."
                 },
                 {
                   title: "Flat Roofs",
-                  description: "Expert installation and repair for garages and extensions using high-performance, watertight materials."
+                  description: "Specialist installation and repair using advanced, watertight materials like EPDM and GRP for garages, extensions, and commercial properties."
                 },
                 {
                   title: "Roof Cleaning",
-                  description: "Gentle and safe moss and algae removal that restores your roof's appearance without causing damage to your tiles."
+                  description: "Professional and safe moss, algae, and lichen removal that restores your roof's appearance and prevents long-term damage."
+                },
+                {
+                  title: "Property Maintenance",
+                  description: "A complete range of services for general upkeep, including exterior painting, brickwork repairs, and other essential tasks."
                 }
               ].map((service, index) => (
                 <Card key={index} className="h-full">

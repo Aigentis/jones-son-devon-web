@@ -126,7 +126,7 @@ const Index = () => {
             <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               At Jones and Son Roofing and Property Maintenance, we provide comprehensive roofing and exterior solutions designed to protect and enhance your home. As a trusted local company, we take pride in our expert craftsmanship and commitment to quality.
             </p>
-            <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mt-4">
+            <p className="text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed mt-4 text-orange-500">
               All of our work is backed by our 10-year guarantee and full insurance coverage, so you can have complete peace of mind.
             </p>
           </div>

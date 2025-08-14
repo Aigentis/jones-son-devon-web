@@ -63,10 +63,7 @@ const Index = () => {
                   North Devon's Trusted
                   <span className="block text-orange-400 mt-2">Roofing & Property Specialists</span>
                 </h1>
-                <p className="text-lg sm:text-xl lg:text-2xl text-blue-100 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                  Family-run business serving North Devon for over 10 years. 
-                  Professional property maintenance with a 10-year guarantee on all work.
-                </p>
+                <p className="text-lg sm:text-xl lg:text-2xl text-blue-100 leading-relaxed max-w-2xl mx-auto lg:mx-0">Family-run business serving North Devon with  over 20 years experience. Professional property maintenance with a 10-year guarantee on all roofing work.</p>
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">

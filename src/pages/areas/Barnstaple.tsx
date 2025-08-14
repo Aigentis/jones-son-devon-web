@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ContactPopup } from "@/components/ui/ContactPopup";
 import { Phone, Mail, Shield, Award, Clock } from "lucide-react";
+import barnstapleHero from "@/assets/barnstaple-hero.jpg";
 
 export default function Barnstaple() {
   return (
@@ -11,25 +12,27 @@ export default function Barnstaple() {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-blue-50 to-gray-50">
-        <div className="container mx-auto px-4">
+      <section className="relative min-h-screen bg-cover bg-center bg-no-repeat overflow-hidden" style={{backgroundImage: `url(${barnstapleHero})`}}>
+        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div className="relative container mx-auto px-4 py-16 lg:py-24 min-h-screen flex items-center">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Your Local Roofing & Property Maintenance Experts in Barnstaple
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight text-white mb-6">
+              Your Local Roofing & Property Maintenance Experts in
+              <span className="block text-orange-400 mt-2">Barnstaple</span>
             </h1>
-            <p className="text-xl text-gray-600 mb-8">
+            <p className="text-lg sm:text-xl lg:text-2xl text-blue-100 leading-relaxed mb-8">
               Welcome to Jones & Son Roofing, your trusted partner for all roofing and property maintenance needs in Barnstaple. With over 20 years of experience, we have proudly served countless homeowners, delivering exceptional quality and reliability. We understand the specific needs of Barnstaple properties and are committed to keeping your home protected, beautiful, and well-maintained.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <ContactPopup 
                 location="Barnstaple"
                 trigger={
-                  <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
+                  <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-white font-semibold text-lg px-8 py-4 h-auto">
                     Get Free Quote
                   </Button>
                 }
               />
-              <Button variant="outline" size="lg">
+              <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-blue-900 font-semibold text-lg px-8 py-4 h-auto">
                 <Phone className="h-5 w-5 mr-2" />
                 01271 614 770
               </Button>

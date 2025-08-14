@@ -59,8 +59,8 @@ const Index = () => {
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full">
             <div className="space-y-6 lg:space-y-8 text-center lg:text-left">
               <div className="space-y-4">
-                <h1 className="text-8xl sm:text-9xl lg:text-9xl xl:text-9xl font-bold leading-tight text-white">
-                  North Devon's Trusted
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight text-white">
+                  North Devon's <span className="text-8xl sm:text-9xl lg:text-9xl xl:text-9xl">Trusted</span>
                   <span className="block text-orange-400 mt-2">Roofing & Property Specialists</span>
                 </h1>
                 <p className="text-lg sm:text-xl lg:text-2xl text-blue-100 leading-relaxed max-w-2xl mx-auto lg:mx-0">Family-run business serving North Devon with  over 20 years experience. Professional property maintenance with a 10-year guarantee on all roofing work.</p>

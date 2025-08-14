@@ -92,10 +92,23 @@ export const Footer = () => {
             <div className="text-gray-400 text-sm">
               © 2024 Jones & Son Property Maintenance. All rights reserved.
             </div>
-            <div className="flex space-x-6 mt-4 md:mt-0">
-              <a href="/privacy" className="text-gray-400 hover:text-white text-sm transition-colors">Privacy Policy</a>
-              <a href="/terms" className="text-gray-400 hover:text-white text-sm transition-colors">Terms of Service</a>
-              <a href="/sitemap" className="text-gray-400 hover:text-white text-sm transition-colors">Sitemap</a>
+            <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6 mt-4 md:mt-0">
+              <div className="text-gray-400 text-sm">
+                Designed and maintained by{" "}
+                <a 
+                  href="https://KelvinLee.io" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:text-blue-300 underline"
+                >
+                  Kelvin Lee
+                </a>
+              </div>
+              <div className="flex space-x-6">
+                <a href="/privacy" className="text-gray-400 hover:text-white text-sm transition-colors">Privacy Policy</a>
+                <a href="/terms" className="text-gray-400 hover:text-white text-sm transition-colors">Terms of Service</a>
+                <a href="/sitemap" className="text-gray-400 hover:text-white text-sm transition-colors">Sitemap</a>
+              </div>
             </div>
           </div>
         </div>

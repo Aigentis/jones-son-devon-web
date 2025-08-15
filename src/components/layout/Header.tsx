@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Phone, Menu, X, Mail, MapPin } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import { QuotePopup } from "@/components/ui/QuotePopup";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -104,7 +105,11 @@ export const Header = () => {
             ) : (
               <a href="/auth" className="text-gray-700 hover:text-blue-600 font-medium">Login</a>
             )}
-            <Button className="bg-blue-600 hover:bg-blue-700">Get Free Quote</Button>
+            <QuotePopup 
+              trigger={
+                <Button className="bg-blue-600 hover:bg-blue-700">Get Free Quote</Button>
+              }
+            />
           </div>
 
           {/* Mobile menu button */}
@@ -146,9 +151,13 @@ export const Header = () => {
                   Login
                 </a>
               )}
-              <Button className="bg-blue-600 hover:bg-blue-700 w-fit">
-                Get Free Quote
-              </Button>
+              <QuotePopup 
+                trigger={
+                  <Button className="bg-blue-600 hover:bg-blue-700 w-fit">
+                    Get Free Quote
+                  </Button>
+                }
+              />
             </nav>
           </div>
         )}

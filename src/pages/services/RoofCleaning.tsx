@@ -2,7 +2,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ContactPopup } from "@/components/ui/ContactPopup";
+import { UnifiedQuotePopup } from "@/components/ui/UnifiedQuotePopup";
 import { Phone, Sparkles, Leaf, Home, Award } from "lucide-react";
 
 export default function RoofCleaning() {
@@ -21,8 +21,8 @@ export default function RoofCleaning() {
               Gentle and safe moss and algae removal that restores your roof's appearance without causing damage to your tiles. Professional cleaning across North Devon.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <ContactPopup 
-                location="Roof Cleaning Service"
+              <UnifiedQuotePopup 
+                service="Roof Cleaning"
                 trigger={
                   <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
                     Get Free Quote
@@ -129,8 +129,8 @@ export default function RoofCleaning() {
               cleaning that will restore your roof's appearance and protect its longevity.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <ContactPopup 
-                location="Roof Cleaning Service"
+              <UnifiedQuotePopup 
+                service="Roof Cleaning"
                 trigger={
                   <Button size="lg" variant="outline" className="text-blue-600 bg-white hover:bg-gray-100">
                     Contact Us Today

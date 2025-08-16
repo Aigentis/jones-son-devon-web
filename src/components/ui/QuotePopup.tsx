@@ -4,18 +4,23 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
 import { Clock, Phone } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
-interface QuotePopupProps {
+interface UnifiedQuotePopupProps {
   trigger: React.ReactNode;
+  location?: string;
+  service?: string;
 }
 
-export const QuotePopup = ({ trigger }: QuotePopupProps) => {
+export const QuotePopup = ({ trigger, location, service }: UnifiedQuotePopupProps) => {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [area, setArea] = useState("");
+  const [selectedArea, setSelectedArea] = useState(location || "");
+  const [selectedService, setSelectedService] = useState(service || "");
+  const [message, setMessage] = useState("");
   const { toast } = useToast();
 
   const areas = [
@@ -29,20 +34,42 @@ export const QuotePopup = ({ trigger }: QuotePopupProps) => {
     "Other North Devon Area"
   ];
 
+  const services = [
+    "Fascias & Soffits",
+    "Guttering", 
+    "Cladding",
+    "Dry Verge",
+    "Flat Roofs",
+    "Roof Cleaning",
+    "Property Maintenance",
+    "General Roofing Query"
+  ];
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!name || !phone || !area) {
+    if (!name || !phone || !selectedArea) {
       toast({
-        title: "Please fill in all fields",
-        description: "All fields are required to get your free quote.",
+        title: "Please fill in required fields",
+        description: "Name, phone number, and area are required.",
         variant: "destructive"
       });
       return;
     }
     
-    const subject = "Free Quote Request";
-    const body = `Name: ${name}\nPhone: ${phone}\nArea: ${area}\n\nPlease provide a free quote for my roofing needs.`;
+    const subject = selectedService ? `Quote Request - ${selectedService}` : "Free Quote Request";
+    let body = `Name: ${name}\nPhone: ${phone}\nArea: ${selectedArea}`;
+    
+    if (selectedService) {
+      body += `\nService Required: ${selectedService}`;
+    }
+    
+    if (message) {
+      body += `\n\nMessage:\n${message}`;
+    }
+    
+    body += `\n\nPlease provide a free quote for my roofing needs.`;
+    
     const emailUrl = `mailto:info@jonesandsonroofing.uk?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     
     window.location.href = emailUrl;
@@ -55,7 +82,9 @@ export const QuotePopup = ({ trigger }: QuotePopupProps) => {
     setOpen(false);
     setName("");
     setPhone("");
-    setArea("");
+    setSelectedArea("");
+    setSelectedService("");
+    setMessage("");
   };
 
   return (
@@ -63,7 +92,7 @@ export const QuotePopup = ({ trigger }: QuotePopupProps) => {
       <DialogTrigger asChild>
         {trigger}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md max-h-[90vh] overflow-y-auto">
         {/* Hero Section */}
         <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-6 -m-6 mb-4 rounded-t-lg">
           <div className="flex items-center justify-center gap-2 mb-2">
@@ -108,11 +137,11 @@ export const QuotePopup = ({ trigger }: QuotePopupProps) => {
           
           <div>
             <Label htmlFor="area">Area *</Label>
-            <Select value={area} onValueChange={setArea} required>
+            <Select value={selectedArea} onValueChange={setSelectedArea} required>
               <SelectTrigger>
                 <SelectValue placeholder="Select your area" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-white z-50">
                 {areas.map((areaOption) => (
                   <SelectItem key={areaOption} value={areaOption}>
                     {areaOption}
@@ -120,6 +149,33 @@ export const QuotePopup = ({ trigger }: QuotePopupProps) => {
                 ))}
               </SelectContent>
             </Select>
+          </div>
+
+          <div>
+            <Label htmlFor="service">Service Required</Label>
+            <Select value={selectedService} onValueChange={setSelectedService}>
+              <SelectTrigger>
+                <SelectValue placeholder="Select service (optional)" />
+              </SelectTrigger>
+              <SelectContent className="bg-white z-50">
+                {services.map((serviceOption) => (
+                  <SelectItem key={serviceOption} value={serviceOption}>
+                    {serviceOption}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div>
+            <Label htmlFor="message">Additional Message</Label>
+            <Textarea
+              id="message"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="Tell us about your project..."
+              rows={3}
+            />
           </div>
           
           <div className="flex gap-2 pt-4">

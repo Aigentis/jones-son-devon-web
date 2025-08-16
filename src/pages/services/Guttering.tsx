@@ -2,7 +2,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ContactPopup } from "@/components/ui/ContactPopup";
+import { UnifiedQuotePopup } from "@/components/ui/UnifiedQuotePopup";
 import { Phone, Shield, Droplets, Clock, Award } from "lucide-react";
 
 export default function Guttering() {
@@ -21,8 +21,8 @@ export default function Guttering() {
               Protect your property with reliable guttering systems that effectively manage rainfall and prevent water damage. Expert installation and repair services across North Devon.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <ContactPopup 
-                location="Guttering Service"
+              <UnifiedQuotePopup 
+                service="Guttering"
                 trigger={
                   <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
                     Get Free Quote
@@ -129,8 +129,8 @@ export default function Guttering() {
               services that will protect your property for years to come.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <ContactPopup 
-                location="Guttering Service"
+              <UnifiedQuotePopup 
+                service="Guttering"
                 trigger={
                   <Button size="lg" variant="outline" className="text-blue-600 bg-white hover:bg-gray-100">
                     Contact Us Today

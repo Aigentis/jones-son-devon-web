@@ -2,7 +2,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ContactPopup } from "@/components/ui/ContactPopup";
+import { UnifiedQuotePopup } from "@/components/ui/UnifiedQuotePopup";
 import { Phone, Shield, Wind, Wrench, Award } from "lucide-react";
 
 export default function DryVerge() {
@@ -21,8 +21,8 @@ export default function DryVerge() {
               Secure, maintenance-free dry verge systems that protect your roof's edges from wind uplift and replace crumbling mortar with modern, reliable protection.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <ContactPopup 
-                location="Dry Verge Service"
+              <UnifiedQuotePopup 
+                service="Dry Verge"
                 trigger={
                   <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
                     Get Free Quote
@@ -129,8 +129,8 @@ export default function DryVerge() {
               dry verge installation that will protect your roof for decades to come.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <ContactPopup 
-                location="Dry Verge Service"
+              <UnifiedQuotePopup 
+                service="Dry Verge"
                 trigger={
                   <Button size="lg" variant="outline" className="text-blue-600 bg-white hover:bg-gray-100">
                     Contact Us Today

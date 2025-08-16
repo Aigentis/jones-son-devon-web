@@ -3,6 +3,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { QuotePopup } from "@/components/ui/QuotePopup";
 import { Phone, Award, Users, Clock, Shield } from "lucide-react";
 
 const About = () => {
@@ -137,9 +138,13 @@ const About = () => {
             When you choose Jones & Son, you're choosing a local business that cares about 
             quality, reliability, and customer satisfaction above all else.
           </p>
-          <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-white font-semibold">
-            Get Your Free Quote Today
-          </Button>
+          <QuotePopup 
+            trigger={
+              <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-white font-semibold text-xl px-12 py-6 h-auto">
+                Get Your Free Quote Today
+              </Button>
+            }
+          />
         </div>
       </section>
 

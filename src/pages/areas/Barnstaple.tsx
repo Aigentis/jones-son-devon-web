@@ -32,7 +32,7 @@ export default function Barnstaple() {
                   </Button>
                 }
               />
-              <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-blue-900 font-semibold text-lg px-8 py-4 h-auto">
+              <Button size="lg" variant="outline" className="bg-blue-600 border-2 border-blue-600 text-white hover:bg-blue-700 hover:border-blue-700 font-semibold text-lg px-8 py-4 h-auto">
                 <Phone className="h-5 w-5 mr-2" />
                 01271 614 770
               </Button>

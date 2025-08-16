@@ -34,18 +34,18 @@ const About = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20">
+      <section className="bg-gradient-to-br from-blue-600 to-blue-700 text-white py-20">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-4xl lg:text-6xl font-bold mb-6">
-                About Jones & Son
+                About <span className="text-orange-400">Jones & Son</span>
               </h1>
               <p className="text-xl text-blue-100 mb-8">
                 Your trusted North Devon roofing specialists. Family-run business 
-                with over 10 years of experience serving our local community.
+                with over 20 years of experience serving our local community.
               </p>
-              <Button size="lg" className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold">
+              <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-white font-semibold">
                 <Phone className="h-5 w-5 mr-2" />
                 Call 01271 614 770
               </Button>
@@ -68,7 +68,7 @@ const About = () => {
             <h2 className="text-4xl font-bold text-center mb-12">Our Story</h2>
             <div className="prose prose-lg mx-auto text-gray-600">
               <p className="text-xl leading-relaxed mb-6">
-                Jones & Son Property Maintenance was founded over a decade ago with a simple mission: 
+                Jones & Son Property Maintenance was founded over two decades ago with a simple mission: 
                 to provide North Devon with honest, reliable roofing and property maintenance services 
                 that homeowners can trust.
               </p>
@@ -103,8 +103,8 @@ const About = () => {
             {values.map((value, index) => (
               <Card key={index} className="text-center hover:shadow-lg transition-shadow">
                 <CardContent className="p-8">
-                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <value.icon className="h-8 w-8 text-blue-600" />
+                  <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <value.icon className="h-8 w-8 text-orange-600" />
                   </div>
                   <h3 className="text-xl font-semibold mb-4">{value.title}</h3>
                   <p className="text-gray-600">{value.description}</p>
@@ -116,20 +116,20 @@ const About = () => {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-20 bg-blue-600 text-white">
+      <section className="py-20 bg-gradient-to-br from-blue-600 to-blue-700 text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold mb-8">Why Choose Jones & Son?</h2>
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             <div>
-              <div className="text-4xl font-bold text-yellow-400 mb-2">10+</div>
+              <div className="text-4xl font-bold text-orange-400 mb-2">20+</div>
               <p className="text-xl">Years Experience</p>
             </div>
             <div>
-              <div className="text-4xl font-bold text-yellow-400 mb-2">500+</div>
+              <div className="text-4xl font-bold text-orange-400 mb-2">500+</div>
               <p className="text-xl">Happy Customers</p>
             </div>
             <div>
-              <div className="text-4xl font-bold text-yellow-400 mb-2">100%</div>
+              <div className="text-4xl font-bold text-orange-400 mb-2">100%</div>
               <p className="text-xl">Guarantee on Work</p>
             </div>
           </div>
@@ -137,7 +137,7 @@ const About = () => {
             When you choose Jones & Son, you're choosing a local business that cares about 
             quality, reliability, and customer satisfaction above all else.
           </p>
-          <Button size="lg" className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold">
+          <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-white font-semibold">
             Get Your Free Quote Today
           </Button>
         </div>

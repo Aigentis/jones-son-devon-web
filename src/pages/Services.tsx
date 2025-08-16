@@ -7,7 +7,7 @@ const Services = () => {
   const services = [{
     title: "Fascias & Soffits",
     description: "Professional installation and replacement of fascias and soffits to protect your roofline and enhance your property's appearance.",
-    image: "/placeholder.svg",
+    image: "/lovable-uploads/d1904592-63dc-47b2-bb22-d71dff0aeee9.png",
     features: ["UPVC & Timber Options", "10-Year Guarantee", "Free Survey & Quote", "All Weather Installation", "Full Insurance Coverage"],
     price: "From £150 per linear metre"
   }, {

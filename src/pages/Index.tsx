@@ -93,8 +93,12 @@ const Index = () => {
             </div>
             
             <div className="order-first lg:order-last">
-              <div className="relative">
-                
+              <div className="relative flex justify-center lg:justify-end">
+                <img 
+                  src="/lovable-uploads/5489f883-f231-4d3b-8acd-6c5ebe21e107.png" 
+                  alt="5 Star Google Reviews" 
+                  className="w-64 h-auto"
+                />
               </div>
             </div>
           </div>

@@ -94,16 +94,6 @@ const Index = () => {
             
             <div className="order-first lg:order-last">
               <div className="relative">
-                {/* Video Placeholder */}
-                <div className="relative bg-black bg-opacity-20 rounded-2xl shadow-2xl w-full h-auto max-w-lg mx-auto aspect-video flex items-center justify-center backdrop-blur-sm border-2 border-white border-opacity-30">
-                  <div className="text-center text-white">
-                    <div className="inline-flex p-4 bg-orange-500 rounded-full mb-4 hover:bg-orange-600 transition-colors cursor-pointer">
-                      <Play className="h-8 w-8 text-white" />
-                    </div>
-                    <p className="text-lg font-semibold">Watch Our Story</p>
-                    <p className="text-sm text-gray-300">Click to add your video</p>
-                  </div>
-                </div>
                 <div className="absolute -bottom-4 -right-4 bg-orange-500 text-white rounded-xl p-4 shadow-lg">
                   <div className="text-center">
                     <div className="text-2xl font-bold">10+</div>

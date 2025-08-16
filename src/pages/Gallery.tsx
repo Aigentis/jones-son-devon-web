@@ -139,7 +139,7 @@ const jobTypes = ["Roof Replacement", "Roof Repair", "Guttering", "Fascias & Sof
     setEditArea(job.area);
     setEditJobType(job.job_type);
     setEditDescription(job.description || "");
-    setEditMainImageId(job.main_image_id || "");
+    setEditMainImageId(job.main_image_id || (job.images && job.images.length > 0 ? job.images[0].id : ""));
     setEditCategoryId(job.category_id || "");
     setNewFiles([]);
     setEditOpen(true);
@@ -156,14 +156,17 @@ const jobTypes = ["Roof Replacement", "Roof Repair", "Guttering", "Fascias & Sof
     setIsUpdating(true);
     try {
       // Update job details
+      console.log("Updating job with main_image_id:", editMainImageId);
       await updateJob(editingJob.id, {
         title: editTitle,
         area: editArea,
         job_type: editJobType,
         description: editDescription || undefined,
-        main_image_id: editMainImageId || undefined,
+        main_image_id: editMainImageId,
         category_id: editCategoryId || undefined,
       });
+
+      console.log("Job updated successfully with main image:", editMainImageId);
 
       // Add new images if any
       if (newFiles.length > 0) {
@@ -500,7 +503,14 @@ const jobTypes = ["Roof Replacement", "Roof Repair", "Guttering", "Fascias & Sof
                               <Button
                                 size="sm"
                                 variant={editMainImageId === img.id ? "default" : "secondary"}
-                                onClick={() => setEditMainImageId(img.id)}
+                                onClick={() => {
+                                  console.log("Setting main image to:", img.id);
+                                  setEditMainImageId(img.id);
+                                  toast({ 
+                                    title: "Main image selected", 
+                                    description: `This image will be set as the main image when you save.` 
+                                  });
+                                }}
                                 className="h-7 text-xs px-2"
                               >
                                 {editMainImageId === img.id ? "★ Main" : "Set Main"}

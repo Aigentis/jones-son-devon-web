@@ -94,12 +94,7 @@ const Index = () => {
             
             <div className="order-first lg:order-last">
               <div className="relative">
-                <div className="absolute -bottom-4 -right-4 bg-orange-500 text-white rounded-xl p-4 shadow-lg">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold">10+</div>
-                    <div className="text-sm">Years Experience</div>
-                  </div>
-                </div>
+                
               </div>
             </div>
           </div>

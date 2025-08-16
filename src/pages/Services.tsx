@@ -92,8 +92,17 @@ const Services = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20">
-        <div className="container mx-auto px-4 text-center">
+      <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20 relative">
+        <div className="container mx-auto px-4 text-center relative">
+          {/* Google Reviews Badge - Top Right */}
+          <div className="absolute top-0 right-0 z-10">
+            <img 
+              src="/lovable-uploads/5489f883-f231-4d3b-8acd-6c5ebe21e107.png" 
+              alt="5 Star Google Reviews"
+              className="h-16 lg:h-20 w-auto"
+            />
+          </div>
+          
           <h1 className="text-4xl lg:text-6xl font-bold mb-6">
             Professional Roofing Services
           </h1>

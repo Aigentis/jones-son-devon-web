@@ -40,28 +40,50 @@ export const useJobs = () => {
   return useQuery({
     queryKey: ["gallery-jobs"],
     queryFn: async (): Promise<Job[]> => {
-      const { data, error } = await supabase
+      // First get all jobs
+      const { data: jobsData, error: jobsError } = await supabase
         .from("jobs")
-        .select(`
-          *,
-          main_image:blog_images!jobs_main_image_id_fkey(*),
-          images:blog_images!blog_images_job_id_fkey(*)
-        `)
+        .select("*")
         .order("created_at", { ascending: false });
 
-      if (error) throw error;
+      if (jobsError) throw jobsError;
 
-      const jobs: Job[] = (data || []).map((job: any) => ({
-        ...job,
-        main_image: job.main_image ? {
-          ...job.main_image,
-          public_url: supabase.storage.from("blog-images").getPublicUrl(job.main_image.file_path).data.publicUrl,
-        } : null,
-        images: (job.images || []).map((img: any) => ({
+      if (!jobsData || jobsData.length === 0) {
+        return [];
+      }
+
+      // Get all images related to these jobs
+      const jobIds = jobsData.map(job => job.id);
+      const { data: imagesData, error: imagesError } = await supabase
+        .from("blog_images")
+        .select("*")
+        .in("job_id", jobIds);
+
+      if (imagesError) throw imagesError;
+
+      // Group images by job_id
+      const imagesByJobId = (imagesData || []).reduce((acc, img) => {
+        if (!acc[img.job_id]) acc[img.job_id] = [];
+        acc[img.job_id].push({
           ...img,
           public_url: supabase.storage.from("blog-images").getPublicUrl(img.file_path).data.publicUrl,
-        })),
-      }));
+        });
+        return acc;
+      }, {} as Record<string, GalleryImage[]>);
+
+      // Combine jobs with their images
+      const jobs: Job[] = jobsData.map((job: any) => {
+        const jobImages = imagesByJobId[job.id] || [];
+        const mainImage = job.main_image_id 
+          ? jobImages.find(img => img.id === job.main_image_id) || null
+          : null;
+
+        return {
+          ...job,
+          main_image: mainImage,
+          images: jobImages,
+        };
+      });
 
       return jobs;
     },

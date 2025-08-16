@@ -50,19 +50,19 @@ const Index = () => {
   return <div className="min-h-screen bg-white">
       <Header />
       
-      {/* Google Reviews Image */}
-      <div className="absolute top-0 right-0 z-10">
-        <img 
-          src="/lovable-uploads/5489f883-f231-4d3b-8acd-6c5ebe21e107.png" 
-          alt="5 Star Google Reviews" 
-          className="w-64 h-auto"
-        />
-      </div>
-
       {/* Hero Section */}
       <section className="relative min-h-screen bg-cover bg-center bg-no-repeat overflow-hidden" style={{
       backgroundImage: `url('/lovable-uploads/b08eef82-716b-4a9b-8c9c-698cd5876ed4.png')`
     }}>
+        {/* Google Reviews Image */}
+        <div className="absolute top-0 right-0 z-10 p-4">
+          <img 
+            src="/lovable-uploads/5489f883-f231-4d3b-8acd-6c5ebe21e107.png" 
+            alt="5 Star Google Reviews" 
+            className="w-64 h-auto"
+          />
+        </div>
+        
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         <div className="relative container mx-auto px-4 py-16 lg:py-24 min-h-screen flex items-center">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full">

@@ -19,7 +19,7 @@ const Services = () => {
   }, {
     title: "UPVC Cladding",
     description: "Modern cladding solutions to enhance and protect your property's exterior with low-maintenance materials.",
-    image: "/placeholder.svg",
+    image: "/lovable-uploads/7d82f95d-3d99-40b6-b550-45f02b663f91.png",
     features: ["UPVC & Composite", "Weatherproof Systems", "Low Maintenance", "Insulation Benefits", "Color Matched Trims"],
     price: "From £45 per square metre"
   }, {

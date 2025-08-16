@@ -211,6 +211,7 @@ export type Database = {
       jobs: {
         Row: {
           area: string
+          category_id: string | null
           created_at: string
           description: string | null
           id: string
@@ -221,6 +222,7 @@ export type Database = {
         }
         Insert: {
           area: string
+          category_id?: string | null
           created_at?: string
           description?: string | null
           id?: string
@@ -231,6 +233,7 @@ export type Database = {
         }
         Update: {
           area?: string
+          category_id?: string | null
           created_at?: string
           description?: string | null
           id?: string
@@ -245,6 +248,13 @@ export type Database = {
             columns: ["main_image_id"]
             isOneToOne: false
             referencedRelation: "blog_images"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "jobs_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
             referencedColumns: ["id"]
           },
         ]

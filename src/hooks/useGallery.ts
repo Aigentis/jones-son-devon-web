@@ -154,6 +154,7 @@ export const useUploadJob = () => {
         area: jobData.area,
         job_type: jobData.job_type,
         description: jobData.description || null,
+        category_id: jobData.categoryId || null,
       })
       .select()
       .single();

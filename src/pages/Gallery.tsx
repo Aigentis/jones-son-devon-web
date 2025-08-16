@@ -7,12 +7,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
-import { useJobs, useUploadJob } from "@/hooks/useGallery";
+import { useJobs, useUploadJob, useEditJob } from "@/hooks/useGallery";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useAuth } from "@/contexts/AuthContext";
 import { Textarea } from "@/components/ui/textarea";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Badge } from "@/components/ui/badge";
+import { Trash2, Edit, Plus } from "lucide-react";
 
 const setMeta = (name: string, content: string) => {
   let tag = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement | null;
@@ -37,6 +38,7 @@ const setCanonical = (href: string) => {
 export default function Gallery() {
   const { data: jobs = [], isLoading, error } = useJobs();
   const { uploadJob } = useUploadJob();
+  const { updateJob, addImagesToJob, removeImageFromJob } = useEditJob();
   const { toast } = useToast();
   const { user } = useAuth();
 
@@ -52,6 +54,17 @@ export default function Gallery() {
   const [selectedJob, setSelectedJob] = useState<any>(null);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  
+  // Edit modal states
+  const [editOpen, setEditOpen] = useState(false);
+  const [editingJob, setEditingJob] = useState<any>(null);
+  const [editTitle, setEditTitle] = useState("");
+  const [editArea, setEditArea] = useState("");
+  const [editJobType, setEditJobType] = useState("");
+  const [editDescription, setEditDescription] = useState("");
+  const [editMainImageId, setEditMainImageId] = useState("");
+  const [newFiles, setNewFiles] = useState<File[]>([]);
+  const [isUpdating, setIsUpdating] = useState(false);
 
   useEffect(() => {
     const title = "Job Gallery | Jones & Son Property Maintenance";
@@ -113,6 +126,74 @@ const jobTypes = ["Roof Replacement", "Roof Repair", "Guttering", "Fascias & Sof
     setSelectedJob(job);
     setCurrentImageIndex(imageIndex);
     setLightboxOpen(true);
+  };
+
+  const openEditModal = (job: any) => {
+    setEditingJob(job);
+    setEditTitle(job.title);
+    setEditArea(job.area);
+    setEditJobType(job.job_type);
+    setEditDescription(job.description || "");
+    setEditMainImageId(job.main_image_id || "");
+    setNewFiles([]);
+    setEditOpen(true);
+  };
+
+  const handleEditSubmit = async () => {
+    if (!editingJob) return;
+
+    if (!editTitle || !editArea || !editJobType) {
+      toast({ title: "Missing information", description: "Please fill in title, area, and job type." });
+      return;
+    }
+
+    setIsUpdating(true);
+    try {
+      // Update job details
+      await updateJob(editingJob.id, {
+        title: editTitle,
+        area: editArea,
+        job_type: editJobType,
+        description: editDescription || undefined,
+        main_image_id: editMainImageId || undefined,
+      });
+
+      // Add new images if any
+      if (newFiles.length > 0) {
+        await addImagesToJob(editingJob.id, newFiles, {
+          title: editTitle,
+          area: editArea,
+          job_type: editJobType,
+        });
+      }
+
+      toast({ title: "Job updated successfully", description: `${editTitle} has been updated` });
+      setEditOpen(false);
+      setEditingJob(null);
+      setNewFiles([]);
+    } catch (e: any) {
+      const message = e?.message || "Update failed. Admin login required.";
+      toast({ title: "Update failed", description: message });
+    } finally {
+      setIsUpdating(false);
+    }
+  };
+
+  const handleRemoveImage = async (imageId: string, filePath: string) => {
+    if (!editingJob) return;
+
+    try {
+      await removeImageFromJob(imageId, filePath);
+      toast({ title: "Image removed", description: "Image has been deleted successfully" });
+      
+      // If the removed image was the main image, clear the main image selection
+      if (editMainImageId === imageId) {
+        setEditMainImageId("");
+      }
+    } catch (e: any) {
+      const message = e?.message || "Failed to remove image";
+      toast({ title: "Remove failed", description: message });
+    }
   };
 
   return (
@@ -239,9 +320,19 @@ const jobTypes = ["Roof Replacement", "Roof Repair", "Guttering", "Fascias & Sof
                 <CardHeader>
                   <CardTitle className="flex items-center justify-between">
                     <span>{job.title}</span>
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 items-center">
                       <Badge variant="secondary">{job.area}</Badge>
                       <Badge variant="outline">{job.job_type}</Badge>
+                      {user && (
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          onClick={() => openEditModal(job)}
+                          className="h-7 w-7 p-0"
+                        >
+                          <Edit className="h-4 w-4" />
+                        </Button>
+                      )}
                     </div>
                   </CardTitle>
                   {job.description && (
@@ -296,6 +387,124 @@ const jobTypes = ["Roof Replacement", "Roof Repair", "Guttering", "Fascias & Sof
               </Card>
             ))}
           </div>
+
+          {/* Edit Job Modal */}
+          <Dialog open={editOpen} onOpenChange={setEditOpen}>
+            <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+              <DialogHeader>
+                <DialogTitle>Edit Job</DialogTitle>
+              </DialogHeader>
+              {editingJob && (
+                <div className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="editTitle">Job Title</Label>
+                      <Input
+                        id="editTitle"
+                        value={editTitle}
+                        onChange={(e) => setEditTitle(e.target.value)}
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="editArea">Area</Label>
+                      <Select value={editArea} onValueChange={setEditArea}>
+                        <SelectTrigger>
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {areas.map(areaOption => (
+                            <SelectItem key={areaOption} value={areaOption}>{areaOption}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="editJobType">Job Type</Label>
+                    <Select value={editJobType} onValueChange={setEditJobType}>
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {jobTypes.map(type => (
+                          <SelectItem key={type} value={type}>{type}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="editDescription">Description</Label>
+                    <Textarea
+                      id="editDescription"
+                      value={editDescription}
+                      onChange={(e) => setEditDescription(e.target.value)}
+                      rows={3}
+                    />
+                  </div>
+
+                  {/* Current Images */}
+                  {editingJob.images && editingJob.images.length > 0 && (
+                    <div className="space-y-2">
+                      <Label>Current Images</Label>
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                        {editingJob.images.map((img: any) => (
+                          <div key={img.id} className="relative group">
+                            <img
+                              src={img.public_url}
+                              alt={img.alt_text}
+                              className="w-full h-24 object-cover rounded border"
+                            />
+                            <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity rounded flex items-center justify-center gap-2">
+                              <Button
+                                size="sm"
+                                variant={editMainImageId === img.id ? "default" : "secondary"}
+                                onClick={() => setEditMainImageId(img.id)}
+                                className="h-7 text-xs"
+                              >
+                                {editMainImageId === img.id ? "Main" : "Set Main"}
+                              </Button>
+                              <Button
+                                size="sm"
+                                variant="destructive"
+                                onClick={() => handleRemoveImage(img.id, img.file_path)}
+                                className="h-7 w-7 p-0"
+                              >
+                                <Trash2 className="h-3 w-3" />
+                              </Button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Add New Images */}
+                  <div className="space-y-2">
+                    <Label htmlFor="newFiles">Add New Images</Label>
+                    <Input
+                      id="newFiles"
+                      type="file"
+                      accept="image/*"
+                      multiple
+                      onChange={(e) => setNewFiles(Array.from(e.target.files || []))}
+                    />
+                    {newFiles.length > 0 && (
+                      <p className="text-sm text-muted-foreground">
+                        {newFiles.length} new image(s) selected
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="flex justify-end gap-2 pt-2">
+                    <Button variant="outline" onClick={() => setEditOpen(false)}>Cancel</Button>
+                    <Button onClick={handleEditSubmit} disabled={isUpdating}>
+                      {isUpdating ? "Updating..." : "Update Job"}
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </DialogContent>
+          </Dialog>
 
           {/* Lightbox Modal */}
           <Dialog open={lightboxOpen} onOpenChange={setLightboxOpen}>

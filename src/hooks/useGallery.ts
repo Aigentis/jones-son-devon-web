@@ -271,3 +271,100 @@ export const useUploadImage = () => {
 
   return { upload };
 };
+
+export const useEditJob = () => {
+  const queryClient = useQueryClient();
+
+  const updateJob = async (
+    jobId: string,
+    updates: {
+      title?: string;
+      area?: string;
+      job_type?: string;
+      description?: string;
+      main_image_id?: string;
+    }
+  ) => {
+    const { error } = await supabase
+      .from("jobs")
+      .update(updates)
+      .eq("id", jobId);
+
+    if (error) throw error;
+
+    await queryClient.invalidateQueries({ queryKey: ["gallery-jobs"] });
+  };
+
+  const addImagesToJob = async (
+    jobId: string,
+    files: File[],
+    jobData: { title: string; area: string; job_type: string }
+  ) => {
+    if (files.length === 0) throw new Error("No files provided");
+
+    const sanitize = (s: string) => s
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9\-\s_]/g, "")
+      .replace(/\s+/g, "-")
+      .replace(/-+/g, "-");
+
+    const uploadedImages = [];
+    
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const ext = file.name.split(".").pop()?.toLowerCase() || "";
+      const base = sanitize(`${jobData.area}-${jobData.job_type}-${Date.now()}-${i + 1}`);
+      const unique = crypto.randomUUID().slice(0, 8);
+      const filename = ext ? `${base}-${unique}.${ext}` : `${base}-${unique}`;
+      const filePath = `uploads/${new Date().getFullYear()}/${String(new Date().getMonth() + 1).padStart(2, "0")}/${filename}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from("blog-images")
+        .upload(filePath, file, { upsert: false, contentType: file.type || undefined });
+
+      if (uploadError) throw uploadError;
+
+      const { data: imageData, error: insertError } = await supabase
+        .from("blog_images")
+        .insert({
+          filename,
+          original_name: file.name,
+          alt_text: `${jobData.title} - Image ${i + 1}`,
+          file_path: filePath,
+          file_size: file.size,
+          mime_type: file.type,
+          job_id: jobId,
+        })
+        .select()
+        .single();
+
+      if (insertError) throw insertError;
+      uploadedImages.push(imageData);
+    }
+
+    await queryClient.invalidateQueries({ queryKey: ["gallery-jobs"] });
+    return uploadedImages;
+  };
+
+  const removeImageFromJob = async (imageId: string, filePath: string) => {
+    // Remove from storage
+    const { error: storageError } = await supabase.storage
+      .from("blog-images")
+      .remove([filePath]);
+
+    if (storageError) throw storageError;
+
+    // Remove from database
+    const { error: dbError } = await supabase
+      .from("blog_images")
+      .delete()
+      .eq("id", imageId);
+
+    if (dbError) throw dbError;
+
+    await queryClient.invalidateQueries({ queryKey: ["gallery-jobs"] });
+  };
+
+  return { updateJob, addImagesToJob, removeImageFromJob };
+};

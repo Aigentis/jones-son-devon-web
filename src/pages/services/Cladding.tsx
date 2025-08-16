@@ -2,7 +2,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { UnifiedQuotePopup } from "@/components/ui/UnifiedQuotePopup";
+import { QuotePopup } from "@/components/ui/QuotePopup";
 import { Phone, Shield, Home, Thermometer, Award } from "lucide-react";
 
 export default function Cladding() {
@@ -21,7 +21,7 @@ export default function Cladding() {
               Transform your home's appearance with our premium exterior cladding. Enhance insulation, provide weather protection, and create a stunning modern finish that lasts.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <UnifiedQuotePopup 
+              <QuotePopup
                 service="Cladding"
                 trigger={
                   <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
@@ -129,7 +129,7 @@ export default function Cladding() {
               can enhance your home's appearance and performance.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <UnifiedQuotePopup 
+              <QuotePopup 
                 service="Cladding"
                 trigger={
                   <Button size="lg" variant="outline" className="text-blue-600 bg-white hover:bg-gray-100">

@@ -2,7 +2,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { UnifiedQuotePopup } from "@/components/ui/UnifiedQuotePopup";
+import { QuotePopup } from "@/components/ui/QuotePopup";
 import { Phone, Mail, Shield, Award, Clock } from "lucide-react";
 import southMoltonHero from "@/assets/southmolton-hero.jpg";
 
@@ -24,7 +24,7 @@ export default function SouthMolton() {
               Welcome, South Molton! With over 20 years of experience, Jones & Son Roofing is the premier choice for roofing and property maintenance in this historic market town. We are committed to delivering professional, reliable services that respect the heritage of the area while providing modern-day performance and protection for your home.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <UnifiedQuotePopup 
+              <QuotePopup
                 location="South Molton"
                 trigger={
                   <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-white font-semibold text-lg px-8 py-4 h-auto">
@@ -115,7 +115,7 @@ export default function SouthMolton() {
               Contact your local South Molton experts today for a free, no-obligation quote and discover the difference our experience makes.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <UnifiedQuotePopup 
+              <QuotePopup 
                 location="South Molton"
                 trigger={
                   <Button size="lg" className="bg-blue-600 hover:bg-blue-700">

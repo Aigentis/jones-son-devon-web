@@ -2,7 +2,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { UnifiedQuotePopup } from "@/components/ui/UnifiedQuotePopup";
+import { QuotePopup } from "@/components/ui/QuotePopup";
 import { Phone, Mail, Shield, Award, Clock } from "lucide-react";
 import barnstapleHero from "@/assets/barnstaple-hero.jpg";
 
@@ -24,7 +24,7 @@ export default function Barnstaple() {
               Welcome to Jones & Son Roofing, your trusted partner for all roofing and property maintenance needs in Barnstaple. With over 20 years of experience, we have proudly served countless homeowners, delivering exceptional quality and reliability. We understand the specific needs of Barnstaple properties and are committed to keeping your home protected, beautiful, and well-maintained.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <UnifiedQuotePopup 
+              <QuotePopup
                 location="Barnstaple"
                 trigger={
                   <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-white font-semibold text-lg px-8 py-4 h-auto">
@@ -115,7 +115,7 @@ export default function Barnstaple() {
               Contact your local Barnstaple experts today for a free, no-obligation quote and discover the difference our experience makes.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <UnifiedQuotePopup 
+              <QuotePopup 
                 location="Barnstaple"
                 trigger={
                   <Button size="lg" className="bg-blue-600 hover:bg-blue-700">

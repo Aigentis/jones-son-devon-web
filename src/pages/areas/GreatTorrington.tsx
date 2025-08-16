@@ -2,7 +2,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { UnifiedQuotePopup } from "@/components/ui/UnifiedQuotePopup";
+import { QuotePopup } from "@/components/ui/QuotePopup";
 import { Phone, Mail, Shield, Award, Clock } from "lucide-react";
 import greatTorringtonHero from "@/assets/greattorrington-hero.jpg";
 
@@ -24,7 +24,7 @@ export default function GreatTorrington() {
               Welcome, Great Torrington! With over 20 years of experience, Jones & Son Roofing is your trusted partner for all roofing and property maintenance needs in this historic town. We are proud to serve the local community and understand the care and attention that properties in Great Torrington require to withstand the elements from their elevated position.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <UnifiedQuotePopup 
+              <QuotePopup
                 location="Great Torrington"
                 trigger={
                   <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-white font-semibold text-lg px-8 py-4 h-auto">
@@ -116,7 +116,7 @@ export default function GreatTorrington() {
               Contact your local Great Torrington experts today for a free, no-obligation quote and discover the difference our experience makes.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <UnifiedQuotePopup 
+              <QuotePopup 
                 location="Great Torrington"
                 trigger={
                   <Button size="lg" className="bg-blue-600 hover:bg-blue-700">

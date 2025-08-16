@@ -2,7 +2,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { UnifiedQuotePopup } from "@/components/ui/UnifiedQuotePopup";
+import { QuotePopup } from "@/components/ui/QuotePopup";
 import { Phone, Shield, Droplets, Clock, Award } from "lucide-react";
 
 export default function FlatRoofs() {
@@ -21,7 +21,7 @@ export default function FlatRoofs() {
               Professional flat roof solutions for garages, extensions, and commercial properties. High-performance, watertight materials installed by experienced specialists.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <UnifiedQuotePopup 
+              <QuotePopup
                 service="Flat Roofs"
                 trigger={
                   <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
@@ -129,7 +129,7 @@ export default function FlatRoofs() {
               for a free assessment and quote on professional flat roof solutions.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <UnifiedQuotePopup 
+              <QuotePopup 
                 service="Flat Roofs"
                 trigger={
                   <Button size="lg" variant="outline" className="text-blue-600 bg-white hover:bg-gray-100">

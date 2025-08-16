@@ -2,7 +2,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { UnifiedQuotePopup } from "@/components/ui/UnifiedQuotePopup";
+import { QuotePopup } from "@/components/ui/QuotePopup";
 import { Phone, Mail, Shield, Award, Clock } from "lucide-react";
 import fremingtonHero from "@/assets/fremington-hero.jpg";
 
@@ -24,7 +24,7 @@ export default function Fremington() {
               Welcome, Fremington! With over 20 years of experience, Jones & Son Roofing is your local expert for all roofing and property maintenance needs. We are proud to serve the Fremington community and are committed to providing the highest quality workmanship to keep your home in top condition, from the village centre to the scenic quay.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <UnifiedQuotePopup 
+              <QuotePopup
                 location="Fremington"
                 trigger={
                   <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-white font-semibold text-lg px-8 py-4 h-auto">
@@ -118,7 +118,7 @@ export default function Fremington() {
               Contact your local Fremington experts today for a free, no-obligation quote and discover the difference our experience makes.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <UnifiedQuotePopup 
+              <QuotePopup 
                 location="Fremington"
                 trigger={
                   <Button size="lg" className="bg-blue-600 hover:bg-blue-700">

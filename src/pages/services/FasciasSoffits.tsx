@@ -2,7 +2,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { UnifiedQuotePopup } from "@/components/ui/UnifiedQuotePopup";
+import { QuotePopup } from "@/components/ui/QuotePopup";
 import { Phone, Shield, Star, Clock, Award } from "lucide-react";
 
 export default function FasciasSoffits() {
@@ -21,7 +21,7 @@ export default function FasciasSoffits() {
               Protect your roofline with our durable UPVC fascias and soffits. Our expert installations provide long-lasting protection and a clean, professional finish for your North Devon home.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <UnifiedQuotePopup 
+              <QuotePopup
                 service="Fascias & Soffits"
                 trigger={
                   <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
@@ -129,7 +129,7 @@ export default function FasciasSoffits() {
               Protect your home with our expert service and quality materials.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <UnifiedQuotePopup 
+              <QuotePopup 
                 service="Fascias & Soffits"
                 trigger={
                   <Button size="lg" variant="outline" className="text-blue-600 bg-white hover:bg-gray-100">

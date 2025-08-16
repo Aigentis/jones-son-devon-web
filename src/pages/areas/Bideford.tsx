@@ -2,7 +2,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { UnifiedQuotePopup } from "@/components/ui/UnifiedQuotePopup";
+import { QuotePopup } from "@/components/ui/QuotePopup";
 import { Phone, Mail, Shield, Award, Clock } from "lucide-react";
 import bidefordHero from "@/assets/bideford-hero.jpg";
 
@@ -24,7 +24,7 @@ export default function Bideford() {
               Hello Bideford! As a local company with over 20 years of experience, Jones & Son Roofing is your go-to provider for all roofing and exterior services. We are dedicated to delivering professional, high-quality workmanship to the Bideford community, ensuring your home is well-protected against the elements that come with living near the River Torridge and the coast.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <UnifiedQuotePopup 
+              <QuotePopup
                 location="Bideford"
                 trigger={
                   <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-white font-semibold text-lg px-8 py-4 h-auto">
@@ -115,7 +115,7 @@ export default function Bideford() {
               Contact your local Bideford experts today for a free, no-obligation quote and discover the difference our experience makes.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <UnifiedQuotePopup 
+              <QuotePopup 
                 location="Bideford"
                 trigger={
                   <Button size="lg" className="bg-blue-600 hover:bg-blue-700">

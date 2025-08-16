@@ -2,7 +2,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { UnifiedQuotePopup } from "@/components/ui/UnifiedQuotePopup";
+import { QuotePopup } from "@/components/ui/QuotePopup";
 import { Phone, Mail, Shield, Award, Clock } from "lucide-react";
 import brauntonHero from "@/assets/braunton-hero.jpg";
 
@@ -24,7 +24,7 @@ export default function Braunton() {
               Hello Braunton! As your trusted local experts with over 20 years of experience, Jones & Son Roofing is dedicated to providing the highest quality roofing and home maintenance services to the community. We understand the unique needs of properties in Braunton, from the village centre to the homes near the dunes, and offer durable solutions designed to withstand both coastal and inland conditions.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <UnifiedQuotePopup 
+              <QuotePopup
                 location="Braunton"
                 trigger={
                   <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-white font-semibold text-lg px-8 py-4 h-auto">
@@ -115,7 +115,7 @@ export default function Braunton() {
               Contact your local Braunton experts today for a free, no-obligation quote and discover the difference our experience makes.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <UnifiedQuotePopup 
+              <QuotePopup 
                 location="Braunton"
                 trigger={
                   <Button size="lg" className="bg-blue-600 hover:bg-blue-700">

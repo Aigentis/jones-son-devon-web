@@ -31,7 +31,7 @@ const Services = () => {
   }, {
     title: "Flat Roofing",
     description: "Specialist flat roofing services using modern materials and techniques for durable, long-lasting results.",
-    image: "/placeholder.svg",
+    image: "/lovable-uploads/e9e1ffd9-981f-415c-9816-b890c5ea33d3.png",
     features: ["EPDM Rubber Roofing", "Traditional Felt Systems", "GRP Fibreglass", "Green Roof Options", "Roof Light Installation", "10-Year Guarantee"],
     price: "From £85 per square metre"
   }, {

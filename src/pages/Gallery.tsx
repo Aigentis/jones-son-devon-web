@@ -362,7 +362,7 @@ const jobTypes = ["Roof Replacement", "Roof Repair", "Guttering", "Fascias & Sof
                 </CardHeader>
                 <CardContent className="p-0">
                   {job.main_image && (
-                    <div className="relative">
+                    <div className="relative group">
                       <img
                         src={job.main_image.public_url}
                         alt={job.main_image.alt_text || job.title}
@@ -370,38 +370,36 @@ const jobTypes = ["Roof Replacement", "Roof Repair", "Guttering", "Fascias & Sof
                         className="w-full h-64 object-cover cursor-pointer hover:opacity-90 transition-opacity"
                         onClick={() => openLightbox(job, 0)}
                       />
-                      <div className="absolute top-2 right-2 bg-black/50 text-white px-2 py-1 rounded text-xs">
+                      <div className="absolute top-2 left-2 bg-primary text-primary-foreground px-2 py-1 rounded text-xs font-medium">
                         Main Image
                       </div>
                     </div>
                   )}
                   {job.images && job.images.length > 1 && (
                     <div className="p-4">
-                      <p className="text-sm font-medium mb-2">Additional Images ({job.images.length - 1})</p>
-                      <div className="grid grid-cols-4 gap-2">
-                        {job.images
-                          .filter(img => img.id !== job.main_image_id)
-                          .slice(0, 4)
-                          .map((img, index) => (
+                      <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-muted-foreground/20 scrollbar-track-transparent">
+                        {job.images.map((img, index) => (
+                          <div key={img.id} className="relative group flex-shrink-0">
                             <img
-                              key={img.id}
                               src={img.public_url}
-                              alt={img.alt_text || `${job.title} - Image ${index + 2}`}
+                              alt={img.alt_text || `${job.title} - Image ${index + 1}`}
                               loading="lazy"
-                              className="w-full h-16 object-cover rounded cursor-pointer hover:opacity-75 transition-opacity"
-                              onClick={() => openLightbox(job, job.images!.findIndex(i => i.id === img.id))}
+                              className={`w-20 h-20 object-cover rounded cursor-pointer hover:opacity-75 transition-opacity ${
+                                img.id === job.main_image_id ? 'ring-2 ring-primary' : ''
+                              }`}
+                              onClick={() => openLightbox(job, index)}
                             />
-                          ))
-                        }
-                        {job.images.length > 5 && (
-                          <div 
-                            className="w-full h-16 bg-muted rounded flex items-center justify-center cursor-pointer hover:bg-muted/80 transition-colors"
-                            onClick={() => openLightbox(job, 0)}
-                          >
-                            <span className="text-xs font-medium">+{job.images.length - 5}</span>
+                            {img.id === job.main_image_id && (
+                              <div className="absolute -top-1 -right-1 bg-primary text-primary-foreground rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                                ★
+                              </div>
+                            )}
                           </div>
-                        )}
+                        ))}
                       </div>
+                      <p className="text-xs text-muted-foreground mt-2">
+                        Scroll to see all {job.images.length} images • Click to view larger
+                      </p>
                     </div>
                   )}
                 </CardContent>
@@ -479,24 +477,33 @@ const jobTypes = ["Roof Replacement", "Roof Repair", "Guttering", "Fascias & Sof
 
                   {/* Current Images */}
                   {editingJob.images && editingJob.images.length > 0 && (
-                    <div className="space-y-2">
-                      <Label>Current Images</Label>
-                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                    <div className="space-y-3">
+                      <Label>Current Images ({editingJob.images.length})</Label>
+                      <div className="flex gap-3 overflow-x-auto pb-3 scrollbar-thin scrollbar-thumb-muted-foreground/20 scrollbar-track-transparent">
                         {editingJob.images.map((img: any) => (
-                          <div key={img.id} className="relative group">
+                          <div key={img.id} className="relative group flex-shrink-0">
                             <img
                               src={img.public_url}
                               alt={img.alt_text}
-                              className="w-full h-24 object-cover rounded border"
+                              className={`w-28 h-28 object-cover rounded border-2 transition-all ${
+                                editMainImageId === img.id 
+                                  ? 'border-primary ring-2 ring-primary/20' 
+                                  : 'border-border hover:border-primary/50'
+                              }`}
                             />
-                            <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity rounded flex items-center justify-center gap-2">
+                            {editMainImageId === img.id && (
+                              <div className="absolute -top-2 -right-2 bg-primary text-primary-foreground rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold">
+                                ★
+                              </div>
+                            )}
+                            <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity rounded flex flex-col items-center justify-center gap-1">
                               <Button
                                 size="sm"
                                 variant={editMainImageId === img.id ? "default" : "secondary"}
                                 onClick={() => setEditMainImageId(img.id)}
-                                className="h-7 text-xs"
+                                className="h-7 text-xs px-2"
                               >
-                                {editMainImageId === img.id ? "Main" : "Set Main"}
+                                {editMainImageId === img.id ? "★ Main" : "Set Main"}
                               </Button>
                               <Button
                                 size="sm"
@@ -510,6 +517,9 @@ const jobTypes = ["Roof Replacement", "Roof Repair", "Guttering", "Fascias & Sof
                           </div>
                         ))}
                       </div>
+                      <p className="text-xs text-muted-foreground">
+                        Scroll horizontally to see all images • Click "Set Main" to choose the main image • Main image shows first in gallery
+                      </p>
                     </div>
                   )}
 

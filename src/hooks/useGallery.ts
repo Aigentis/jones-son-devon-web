@@ -12,8 +12,22 @@ export interface GalleryImage {
   mime_type?: string | null;
   uploaded_by?: string | null;
   category_id?: string | null;
+  job_id?: string | null;
   created_at: string;
   public_url: string;
+}
+
+export interface Job {
+  id: string;
+  title: string;
+  area: string;
+  job_type: string;
+  description?: string | null;
+  main_image_id?: string | null;
+  created_at: string;
+  updated_at: string;
+  main_image?: GalleryImage | null;
+  images?: GalleryImage[];
 }
 
 export interface Category {
@@ -21,6 +35,38 @@ export interface Category {
   name: string;
   slug?: string | null;
 }
+
+export const useJobs = () => {
+  return useQuery({
+    queryKey: ["gallery-jobs"],
+    queryFn: async (): Promise<Job[]> => {
+      const { data, error } = await supabase
+        .from("jobs")
+        .select(`
+          *,
+          main_image:blog_images!jobs_main_image_id_fkey(*),
+          images:blog_images!blog_images_job_id_fkey(*)
+        `)
+        .order("created_at", { ascending: false });
+
+      if (error) throw error;
+
+      const jobs: Job[] = (data || []).map((job: any) => ({
+        ...job,
+        main_image: job.main_image ? {
+          ...job.main_image,
+          public_url: supabase.storage.from("blog-images").getPublicUrl(job.main_image.file_path).data.publicUrl,
+        } : null,
+        images: (job.images || []).map((img: any) => ({
+          ...img,
+          public_url: supabase.storage.from("blog-images").getPublicUrl(img.file_path).data.publicUrl,
+        })),
+      }));
+
+      return jobs;
+    },
+  });
+};
 
 export const useGalleryImages = () => {
   return useQuery({
@@ -52,6 +98,98 @@ export const useCategories = () => {
       return (data as any) || [];
     },
   });
+};
+
+export const useUploadJob = () => {
+  const queryClient = useQueryClient();
+
+  const uploadJob = async (
+    files: File[],
+    jobData: {
+      title: string;
+      area: string;
+      job_type: string;
+      description?: string;
+      mainImageIndex: number;
+    }
+  ) => {
+    if (files.length === 0) throw new Error("No files provided");
+
+    const sanitize = (s: string) => s
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9\-\s_]/g, "")
+      .replace(/\s+/g, "-")
+      .replace(/-+/g, "-");
+
+    // Create job first
+    const { data: job, error: jobError } = await supabase
+      .from("jobs")
+      .insert({
+        title: jobData.title,
+        area: jobData.area,
+        job_type: jobData.job_type,
+        description: jobData.description || null,
+      })
+      .select()
+      .single();
+
+    if (jobError) throw jobError;
+
+    // Upload all images
+    const uploadedImages = [];
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const ext = file.name.split(".").pop()?.toLowerCase() || "";
+      const base = sanitize(`${jobData.area}-${jobData.job_type}-${i + 1}`);
+      const unique = crypto.randomUUID().slice(0, 8);
+      const filename = ext ? `${base}-${unique}.${ext}` : `${base}-${unique}`;
+      const filePath = `uploads/${new Date().getFullYear()}/${String(new Date().getMonth() + 1).padStart(2, "0")}/${filename}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from("blog-images")
+        .upload(filePath, file, { upsert: false, contentType: file.type || undefined });
+
+      if (uploadError) throw uploadError;
+
+      const { data: imageData, error: insertError } = await supabase
+        .from("blog_images")
+        .insert({
+          filename,
+          original_name: file.name,
+          alt_text: `${jobData.title} - Image ${i + 1}`,
+          caption: i === jobData.mainImageIndex ? "Main Image" : null,
+          file_path: filePath,
+          file_size: file.size,
+          mime_type: file.type,
+          job_id: job.id,
+        })
+        .select()
+        .single();
+
+      if (insertError) throw insertError;
+      uploadedImages.push(imageData);
+    }
+
+    // Set main image
+    if (uploadedImages[jobData.mainImageIndex]) {
+      const { error: updateError } = await supabase
+        .from("jobs")
+        .update({ main_image_id: uploadedImages[jobData.mainImageIndex].id })
+        .eq("id", job.id);
+
+      if (updateError) throw updateError;
+    }
+
+    await queryClient.invalidateQueries({ queryKey: ["gallery-jobs"] });
+
+    return {
+      job,
+      images: uploadedImages,
+    };
+  };
+
+  return { uploadJob };
 };
 
 export const useUploadImage = () => {

@@ -24,6 +24,7 @@ export type Database = {
           file_size: number | null
           filename: string
           id: string
+          job_id: string | null
           mime_type: string | null
           original_name: string
           uploaded_by: string | null
@@ -37,6 +38,7 @@ export type Database = {
           file_size?: number | null
           filename: string
           id?: string
+          job_id?: string | null
           mime_type?: string | null
           original_name: string
           uploaded_by?: string | null
@@ -50,6 +52,7 @@ export type Database = {
           file_size?: number | null
           filename?: string
           id?: string
+          job_id?: string | null
           mime_type?: string | null
           original_name?: string
           uploaded_by?: string | null
@@ -60,6 +63,13 @@ export type Database = {
             columns: ["category_id"]
             isOneToOne: false
             referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "blog_images_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "jobs"
             referencedColumns: ["id"]
           },
           {
@@ -194,6 +204,47 @@ export type Database = {
             columns: ["post_id"]
             isOneToOne: false
             referencedRelation: "blog_posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      jobs: {
+        Row: {
+          area: string
+          created_at: string
+          description: string | null
+          id: string
+          job_type: string
+          main_image_id: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          area: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          job_type: string
+          main_image_id?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          area?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          job_type?: string
+          main_image_id?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_jobs_main_image"
+            columns: ["main_image_id"]
+            isOneToOne: false
+            referencedRelation: "blog_images"
             referencedColumns: ["id"]
           },
         ]

@@ -1,94 +1,47 @@
-
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, Phone } from "lucide-react";
-
 const Services = () => {
-  const services = [
-    {
-      title: "Fascias & Soffits",
-      description: "Professional installation and replacement of fascias and soffits to protect your roofline and enhance your property's appearance.",
-      image: "/placeholder.svg",
-      features: [
-        "UPVC & Timber Options",
-        "10-Year Guarantee",
-        "Free Survey & Quote",
-        "All Weather Installation",
-        "Full Insurance Coverage"
-      ],
-      price: "From £150 per linear metre"
-    },
-    {
-      title: "Guttering Services",
-      description: "Complete guttering solutions including cleaning, repairs, and full replacements using high-quality materials.",
-      image: "/placeholder.svg",
-      features: [
-        "All Gutter Materials",
-        "Leaf Guard Installation",
-        "Downpipe Repairs",
-        "Emergency Call-outs",
-        "Gutter Cleaning Service"
-      ],
-      price: "From £80 per linear metre"
-    },
-    {
-      title: "UPVC Cladding",
-      description: "Modern cladding solutions to enhance and protect your property's exterior with low-maintenance materials.",
-      image: "/placeholder.svg",
-      features: [
-        "UPVC & Composite",
-        "Weatherproof Systems",
-        "Low Maintenance",
-        "Insulation Benefits",
-        "Color Matched Trims"
-      ],
-      price: "From £45 per square metre"
-    },
-    {
-      title: "Dry Verge Systems",
-      description: "Secure and weatherproof dry verge systems for long-lasting roof edge protection without mortar pointing.",
-      image: "/placeholder.svg",
-      features: [
-        "No Mortar Required",
-        "Secure Mechanical Fixing",
-        "Weather Resistant",
-        "Prevents Tile Slippage",
-        "Easy Maintenance"
-      ],
-      price: "From £25 per linear metre"
-    },
-    {
-      title: "Flat Roofing",
-      description: "Specialist flat roofing services using modern materials and techniques for durable, long-lasting results.",
-      image: "/placeholder.svg",
-      features: [
-        "EPDM Rubber Roofing",
-        "Traditional Felt Systems",
-        "GRP Fibreglass",
-        "Green Roof Options",
-        "Roof Light Installation"
-      ],
-      price: "From £85 per square metre"
-    },
-    {
-      title: "Roof Cleaning",
-      description: "Professional roof cleaning services to restore your roof's appearance and extend its lifespan.",
-      image: "/placeholder.svg",
-      features: [
-        "Soft Washing Technique",
-        "Moss & Algae Removal",
-        "Gutter Clearing Included",
-        "Biocide Treatment",
-        "Before/After Photos"
-      ],
-      price: "From £8 per square metre"
-    }
-  ];
-
-  return (
-    <div className="min-h-screen">
+  const services = [{
+    title: "Fascias & Soffits",
+    description: "Professional installation and replacement of fascias and soffits to protect your roofline and enhance your property's appearance.",
+    image: "/placeholder.svg",
+    features: ["UPVC & Timber Options", "10-Year Guarantee", "Free Survey & Quote", "All Weather Installation", "Full Insurance Coverage"],
+    price: "From £150 per linear metre"
+  }, {
+    title: "Guttering Services",
+    description: "Complete guttering solutions including cleaning, repairs, and full replacements using high-quality materials.",
+    image: "/placeholder.svg",
+    features: ["All Gutter Materials", "Leaf Guard Installation", "Downpipe Repairs", "Emergency Call-outs", "Gutter Cleaning Service"],
+    price: "From £80 per linear metre"
+  }, {
+    title: "UPVC Cladding",
+    description: "Modern cladding solutions to enhance and protect your property's exterior with low-maintenance materials.",
+    image: "/placeholder.svg",
+    features: ["UPVC & Composite", "Weatherproof Systems", "Low Maintenance", "Insulation Benefits", "Color Matched Trims"],
+    price: "From £45 per square metre"
+  }, {
+    title: "Dry Verge Systems",
+    description: "Secure and weatherproof dry verge systems for long-lasting roof edge protection without mortar pointing.",
+    image: "/placeholder.svg",
+    features: ["No Mortar Required", "Secure Mechanical Fixing", "Weather Resistant", "Prevents Tile Slippage", "Easy Maintenance"],
+    price: "From £25 per linear metre"
+  }, {
+    title: "Flat Roofing",
+    description: "Specialist flat roofing services using modern materials and techniques for durable, long-lasting results.",
+    image: "/placeholder.svg",
+    features: ["EPDM Rubber Roofing", "Traditional Felt Systems", "GRP Fibreglass", "Green Roof Options", "Roof Light Installation"],
+    price: "From £85 per square metre"
+  }, {
+    title: "Roof Cleaning",
+    description: "Professional roof cleaning services to restore your roof's appearance and extend its lifespan.",
+    image: "/placeholder.svg",
+    features: ["Soft Washing Technique", "Moss & Algae Removal", "Gutter Clearing Included", "Biocide Treatment", "Before/After Photos"],
+    price: "From £8 per square metre"
+  }];
+  return <div className="min-h-screen">
       <Header />
       
       {/* Hero Section */}
@@ -96,11 +49,7 @@ const Services = () => {
         <div className="container mx-auto px-4 text-center relative">
           {/* Google Reviews Badge - Top Right */}
           <div className="absolute top-0 right-0 z-10">
-            <img 
-              src="/lovable-uploads/5489f883-f231-4d3b-8acd-6c5ebe21e107.png" 
-              alt="5 Star Google Reviews"
-              className="h-16 lg:h-20 w-auto"
-            />
+            
           </div>
           
           <h1 className="text-4xl lg:text-6xl font-bold mb-6">
@@ -120,14 +69,9 @@ const Services = () => {
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12">
-            {services.map((service, index) => (
-              <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow">
+            {services.map((service, index) => <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow">
                 <div className="aspect-video bg-gray-200">
-                  <img 
-                    src={service.image} 
-                    alt={service.title}
-                    className="w-full h-full object-cover"
-                  />
+                  <img src={service.image} alt={service.title} className="w-full h-full object-cover" />
                 </div>
                 <CardHeader>
                   <CardTitle className="text-2xl text-blue-600">{service.title}</CardTitle>
@@ -137,12 +81,10 @@ const Services = () => {
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-3 mb-6">
-                    {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center">
+                    {service.features.map((feature, idx) => <li key={idx} className="flex items-center">
                         <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
                         <span>{feature}</span>
-                      </li>
-                    ))}
+                      </li>)}
                   </ul>
                   <div className="flex justify-between items-center pt-4 border-t">
                     <div>
@@ -154,15 +96,12 @@ const Services = () => {
                     </Button>
                   </div>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Services;

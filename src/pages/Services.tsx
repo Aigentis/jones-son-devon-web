@@ -37,7 +37,7 @@ const Services = () => {
   }, {
     title: "Roof Cleaning",
     description: "Professional roof cleaning services to restore your roof's appearance and extend its lifespan.",
-    image: "/placeholder.svg",
+    image: "/lovable-uploads/12156499-7462-4b63-aa83-97bd3865be6b.png",
     features: ["Soft Washing Technique", "Moss & Algae Removal", "Gutter Clearing Included", "Biocide Treatment", "Before/After Photos"],
     price: "From £8 per square metre"
   }];

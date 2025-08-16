@@ -50,7 +50,7 @@ export default function Gallery() {
   const [jobType, setJobType] = useState("");
   const [description, setDescription] = useState("");
   const [mainImageIndex, setMainImageIndex] = useState(0);
-  const [categoryId, setCategoryId] = useState("");
+  const [categoryId, setCategoryId] = useState("none");
   const [search, setSearch] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedJob, setSelectedJob] = useState<any>(null);
@@ -65,7 +65,7 @@ export default function Gallery() {
   const [editJobType, setEditJobType] = useState("");
   const [editDescription, setEditDescription] = useState("");
   const [editMainImageId, setEditMainImageId] = useState("");
-  const [editCategoryId, setEditCategoryId] = useState("");
+  const [editCategoryId, setEditCategoryId] = useState("none");
   const [newFiles, setNewFiles] = useState<File[]>([]);
   const [isUpdating, setIsUpdating] = useState(false);
 
@@ -108,7 +108,7 @@ const jobTypes = ["Roof Replacement", "Roof Repair", "Guttering", "Fascias & Sof
         job_type: jobType, 
         description: description || undefined,
         mainImageIndex,
-        categoryId: categoryId || undefined
+        categoryId: categoryId === "none" ? undefined : categoryId
       });
       toast({ title: "Job uploaded successfully", description: `${result.images.length} images uploaded for ${title}` });
       setOpen(false);
@@ -117,7 +117,7 @@ const jobTypes = ["Roof Replacement", "Roof Repair", "Guttering", "Fascias & Sof
       setArea("");
       setJobType("");
       setDescription("");
-      setCategoryId("");
+      setCategoryId("none");
       setMainImageIndex(0);
     } catch (e: any) {
       const message = e?.message || "Upload failed. Admin login required to upload.";
@@ -140,7 +140,7 @@ const jobTypes = ["Roof Replacement", "Roof Repair", "Guttering", "Fascias & Sof
     setEditJobType(job.job_type);
     setEditDescription(job.description || "");
     setEditMainImageId(job.main_image_id || (job.images && job.images.length > 0 ? job.images[0].id : ""));
-    setEditCategoryId(job.category_id || "");
+    setEditCategoryId(job.category_id || "none");
     setNewFiles([]);
     setEditOpen(true);
   };
@@ -163,7 +163,7 @@ const jobTypes = ["Roof Replacement", "Roof Repair", "Guttering", "Fascias & Sof
         job_type: editJobType,
         description: editDescription || undefined,
         main_image_id: editMainImageId,
-        category_id: editCategoryId || undefined,
+        category_id: editCategoryId === "none" ? undefined : editCategoryId,
       });
 
       console.log("Job updated successfully with main image:", editMainImageId);
@@ -279,7 +279,7 @@ const jobTypes = ["Roof Replacement", "Roof Repair", "Guttering", "Fascias & Sof
                           <SelectValue placeholder="Select a category" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="">No Category</SelectItem>
+                          <SelectItem value="none">No Category</SelectItem>
                           {categories.map(category => (
                             <SelectItem key={category.id} value={category.id}>{category.name}</SelectItem>
                           ))}
@@ -461,7 +461,7 @@ const jobTypes = ["Roof Replacement", "Roof Repair", "Guttering", "Fascias & Sof
                         <SelectValue placeholder="Select a category" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="">No Category</SelectItem>
+                        <SelectItem value="none">No Category</SelectItem>
                         {categories.map(category => (
                           <SelectItem key={category.id} value={category.id}>{category.name}</SelectItem>
                         ))}

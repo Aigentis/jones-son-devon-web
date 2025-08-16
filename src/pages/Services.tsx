@@ -88,7 +88,7 @@ const Services = () => {
                   </ul>
                   <div className="flex justify-between items-center pt-4 border-t">
                     <div>
-                      <p className="text-2xl font-bold text-blue-600">{service.price}</p>
+                      
                       <p className="text-sm text-gray-500">Competitive pricing</p>
                     </div>
                     <Button className="bg-blue-600 hover:bg-blue-700">

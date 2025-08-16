@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
-import { useJobs, useUploadJob, useEditJob } from "@/hooks/useGallery";
+import { useJobs, useUploadJob, useEditJob, useCategories } from "@/hooks/useGallery";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useAuth } from "@/contexts/AuthContext";
 import { Textarea } from "@/components/ui/textarea";
@@ -37,6 +37,7 @@ const setCanonical = (href: string) => {
 
 export default function Gallery() {
   const { data: jobs = [], isLoading, error } = useJobs();
+  const { data: categories = [] } = useCategories();
   const { uploadJob } = useUploadJob();
   const { updateJob, addImagesToJob, removeImageFromJob } = useEditJob();
   const { toast } = useToast();
@@ -49,6 +50,7 @@ export default function Gallery() {
   const [jobType, setJobType] = useState("");
   const [description, setDescription] = useState("");
   const [mainImageIndex, setMainImageIndex] = useState(0);
+  const [categoryId, setCategoryId] = useState("");
   const [search, setSearch] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedJob, setSelectedJob] = useState<any>(null);
@@ -63,6 +65,7 @@ export default function Gallery() {
   const [editJobType, setEditJobType] = useState("");
   const [editDescription, setEditDescription] = useState("");
   const [editMainImageId, setEditMainImageId] = useState("");
+  const [editCategoryId, setEditCategoryId] = useState("");
   const [newFiles, setNewFiles] = useState<File[]>([]);
   const [isUpdating, setIsUpdating] = useState(false);
 
@@ -104,7 +107,8 @@ const jobTypes = ["Roof Replacement", "Roof Repair", "Guttering", "Fascias & Sof
         area, 
         job_type: jobType, 
         description: description || undefined,
-        mainImageIndex 
+        mainImageIndex,
+        categoryId: categoryId || undefined
       });
       toast({ title: "Job uploaded successfully", description: `${result.images.length} images uploaded for ${title}` });
       setOpen(false);
@@ -113,6 +117,7 @@ const jobTypes = ["Roof Replacement", "Roof Repair", "Guttering", "Fascias & Sof
       setArea("");
       setJobType("");
       setDescription("");
+      setCategoryId("");
       setMainImageIndex(0);
     } catch (e: any) {
       const message = e?.message || "Upload failed. Admin login required to upload.";
@@ -135,6 +140,7 @@ const jobTypes = ["Roof Replacement", "Roof Repair", "Guttering", "Fascias & Sof
     setEditJobType(job.job_type);
     setEditDescription(job.description || "");
     setEditMainImageId(job.main_image_id || "");
+    setEditCategoryId(job.category_id || "");
     setNewFiles([]);
     setEditOpen(true);
   };
@@ -156,6 +162,7 @@ const jobTypes = ["Roof Replacement", "Roof Repair", "Guttering", "Fascias & Sof
         job_type: editJobType,
         description: editDescription || undefined,
         main_image_id: editMainImageId || undefined,
+        category_id: editCategoryId || undefined,
       });
 
       // Add new images if any
@@ -258,6 +265,20 @@ const jobTypes = ["Roof Replacement", "Roof Repair", "Guttering", "Fascias & Sof
                         <SelectContent>
                           {jobTypes.map(type => (
                             <SelectItem key={type} value={type}>{type}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="category">Category (Optional)</Label>
+                      <Select value={categoryId} onValueChange={setCategoryId}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a category" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="">No Category</SelectItem>
+                          {categories.map(category => (
+                            <SelectItem key={category.id} value={category.id}>{category.name}</SelectItem>
                           ))}
                         </SelectContent>
                       </Select>
@@ -428,6 +449,20 @@ const jobTypes = ["Roof Replacement", "Roof Repair", "Guttering", "Fascias & Sof
                       <SelectContent>
                         {jobTypes.map(type => (
                           <SelectItem key={type} value={type}>{type}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="editCategory">Category</Label>
+                    <Select value={editCategoryId} onValueChange={setEditCategoryId}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a category" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="">No Category</SelectItem>
+                        {categories.map(category => (
+                          <SelectItem key={category.id} value={category.id}>{category.name}</SelectItem>
                         ))}
                       </SelectContent>
                     </Select>

@@ -24,6 +24,7 @@ export interface Job {
   job_type: string;
   description?: string | null;
   main_image_id?: string | null;
+  category_id?: string | null;
   created_at: string;
   updated_at: string;
   main_image?: GalleryImage | null;
@@ -133,6 +134,7 @@ export const useUploadJob = () => {
       job_type: string;
       description?: string;
       mainImageIndex: number;
+      categoryId?: string;
     }
   ) => {
     if (files.length === 0) throw new Error("No files provided");
@@ -174,7 +176,7 @@ export const useUploadJob = () => {
 
       if (uploadError) throw uploadError;
 
-      const { data: imageData, error: insertError } = await supabase
+        const { data: imageData, error: insertError } = await supabase
         .from("blog_images")
         .insert({
           filename,
@@ -185,6 +187,7 @@ export const useUploadJob = () => {
           file_size: file.size,
           mime_type: file.type,
           job_id: job.id,
+          category_id: jobData.categoryId || null,
         })
         .select()
         .single();
@@ -283,6 +286,7 @@ export const useEditJob = () => {
       job_type?: string;
       description?: string;
       main_image_id?: string;
+      category_id?: string;
     }
   ) => {
     const { error } = await supabase

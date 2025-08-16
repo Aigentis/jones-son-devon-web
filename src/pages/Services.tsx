@@ -8,7 +8,7 @@ const Services = () => {
     title: "Fascias & Soffits",
     description: "Professional installation and replacement of fascias and soffits to protect your roofline and enhance your property's appearance.",
     image: "/lovable-uploads/d1904592-63dc-47b2-bb22-d71dff0aeee9.png",
-    features: ["UPVC & Timber Options", "10-Year Guarantee", "Free Survey & Quote", "All Weather Installation", "Full Insurance Coverage"],
+    features: ["UPVC & Timber Options", "Free Survey & Quote", "All Weather Installation", "Full Insurance Coverage"],
     price: "From £150 per linear metre"
   }, {
     title: "Guttering Services",
@@ -32,7 +32,7 @@ const Services = () => {
     title: "Flat Roofing",
     description: "Specialist flat roofing services using modern materials and techniques for durable, long-lasting results.",
     image: "/placeholder.svg",
-    features: ["EPDM Rubber Roofing", "Traditional Felt Systems", "GRP Fibreglass", "Green Roof Options", "Roof Light Installation"],
+    features: ["EPDM Rubber Roofing", "Traditional Felt Systems", "GRP Fibreglass", "Green Roof Options", "Roof Light Installation", "10-Year Guarantee"],
     price: "From £85 per square metre"
   }, {
     title: "Roof Cleaning",

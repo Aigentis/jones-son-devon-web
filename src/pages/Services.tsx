@@ -25,7 +25,7 @@ const Services = () => {
   }, {
     title: "Dry Verge Systems",
     description: "Secure and weatherproof dry verge systems for long-lasting roof edge protection without mortar pointing.",
-    image: "/lovable-uploads/0d2d99de-80f3-4864-988a-9e2d801858a4.png",
+    image: "/lovable-uploads/78096d46-db87-4941-b8c6-bdd89906670c.png",
     features: ["No Mortar Required", "Secure Mechanical Fixing", "Weather Resistant", "Prevents Tile Slippage", "Easy Maintenance"],
     price: "From £25 per linear metre"
   }, {

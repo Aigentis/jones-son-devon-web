@@ -52,8 +52,8 @@ const About = () => {
             </div>
             <div className="relative">
               <img 
-                src="https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=500&h=400&fit=crop" 
-                alt="Jones & Son team" 
+                src="/lovable-uploads/81a878dd-05b3-490f-9542-5037d45927d0.png" 
+                alt="Jones & Son Property Maintenance van" 
                 className="rounded-lg shadow-xl"
               />
             </div>

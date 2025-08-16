@@ -13,7 +13,7 @@ const Services = () => {
   }, {
     title: "Guttering Services",
     description: "Complete guttering solutions including cleaning, repairs, and full replacements using high-quality materials.",
-    image: "/lovable-uploads/c5a96824-a3aa-40f6-a986-7fa6d1db958d.png",
+    image: "/lovable-uploads/4dc5f5f2-ed23-4d0e-b478-136d05627700.png",
     features: ["All Gutter Materials", "Leaf Guard Installation", "Downpipe Repairs", "Emergency Call-outs", "Gutter Cleaning Service"],
     price: "From £80 per linear metre"
   }, {
